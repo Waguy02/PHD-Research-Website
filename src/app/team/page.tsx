@@ -18,7 +18,7 @@ export default function TeamPage() {
                 <img
                   src={`${basePath}/images/${member.image}`}
                   alt={member.name}
-                  className="h-16 w-16 rounded-full object-cover"
+                  className="h-24 w-24 rounded-full object-cover shadow-md sm:h-28 sm:w-28"
                 />
               ) : (
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-lg font-bold text-gray-500">

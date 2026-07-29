@@ -23,7 +23,7 @@ export default function Home() {
             <img
               src={`${basePath}/images/guy-profile.png`}
               alt="Guy Stephane Waffo Dzuyo"
-              className="h-48 w-48 rounded-2xl object-cover shadow-lg sm:h-56 sm:w-56"
+              className="h-56 w-56 rounded-2xl object-cover shadow-lg sm:h-64 sm:w-64"
             />
           </div>
           <div>

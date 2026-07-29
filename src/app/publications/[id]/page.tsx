@@ -24,13 +24,6 @@ const bibtexMap: Record<string, string> = {
   booktitle={IJCAI-ECAI 2026, FINLLM Workshop},
   year={2026}
 }`,
-  "semmamba-neurips-2026": `@inproceedings{waffo2026semmamba,
-  title={SemMamba: Semantic Control by Dynamic Modulation for Time-Series Forecasting},
-  author={Waffo Dzuyo, Guy Stephane and Guibon, Ga{\"{e}}l and Cerisara, Christophe and Belmar-Letelier, Luis},
-  booktitle={NeurIPS 2026},
-  year={2026},
-  note={Under review}
-}`,
 };
 
 export default async function PaperDetailPage({
