@@ -155,7 +155,7 @@ export const teamMembers: TeamMember[] = [
     email: "guy.stephane.waffo@forvismazars.com",
     bio: "PhD candidate researching AI for financial auditing at the intersection of NLP and financial statement analysis. Focused on industry classification, fraud detection, and multimodal time-series forecasting with state-space models.",
     isMainAuthor: true,
-    image: "guy-profile.jpg",
+    image: "guy-profile.png",
   },
   {
     id: "christophe",
@@ -164,7 +164,7 @@ export const teamMembers: TeamMember[] = [
     affiliation: "LORIA, CNRS, Universite de Lorraine / Forvis Mazars",
     email: "christophe.cerisara@loria.fr",
     website: "https://members.loria.fr/CCerisara/",
-    image: "christophe-cerisara.jpg",
+    image: "christophe-cerisara.png",
     bio: "Senior researcher at LORIA, CNRS. Expert in natural language processing, neural networks, and multimodal learning.",
   },
   {
@@ -174,7 +174,7 @@ export const teamMembers: TeamMember[] = [
     affiliation:
       "LORIA, CNRS, Universite de Lorraine / LIPN, Universite Sorbonne Paris Nord",
     email: "gael.guibon@lipn.fr",
-    image: "gael-guibon.jpg",
+    image: "gael-guibon.png",
     bio: "Researcher specializing in NLP and financial text analysis. Affiliated with both LORIA and LIPN.",
   },
   {
@@ -183,7 +183,7 @@ export const teamMembers: TeamMember[] = [
     role: "Industry Supervisor",
     affiliation: "Forvis Mazars",
     email: "luis.belmar-letelier@mazars.fr",
-    image: "luis-belmar.jpg",
+    image: "luis-belmar.png",
     bio: "Industry expert at Forvis Mazars, bringing domain expertise in financial auditing and company analysis.",
   },
 ];
