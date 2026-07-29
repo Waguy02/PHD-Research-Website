@@ -66,8 +66,12 @@ export const papers: Paper[] = [
         url: "https://github.com/WaguyMz/company_classification",
       },
       {
-        label: "Proceedings",
-        url: "https://aaai.org/conference/aaai/aaai-25/",
+        label: "Proceedings (AAAI)",
+        url: "https://ojs.aaai.org/index.php/AAAI/article/view/33806",
+      },
+      {
+        label: "DOI",
+        url: "https://doi.org/10.1609/aaai.v39i16.33806",
       },
     ],
     keyResults: [

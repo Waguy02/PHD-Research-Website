@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-800 bg-[#0a0a0a]">
+    <footer className="border-t border-gray-200 bg-white">
       <div className="mx-auto max-w-5xl px-6 py-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <div className="flex items-center gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-4 text-sm text-gray-400">
             <span>&copy; {new Date().getFullYear()} Guy Stephane Waffo Dzuyo</span>
           </div>
           <div className="flex items-center gap-4">
@@ -13,7 +13,7 @@ export default function Footer() {
               href="https://github.com/Waguy02"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 transition-colors hover:text-white"
+              className="text-gray-400 transition-colors hover:text-gray-700"
               aria-label="GitHub"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -24,7 +24,7 @@ export default function Footer() {
               href="https://scholar.google.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 transition-colors hover:text-white"
+              className="text-gray-400 transition-colors hover:text-gray-700"
               aria-label="Google Scholar"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ export default function Footer() {
               href="https://www.linkedin.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 transition-colors hover:text-white"
+              className="text-gray-400 transition-colors hover:text-gray-700"
               aria-label="LinkedIn"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ export default function Footer() {
             </a>
             <a
               href="mailto:guy.stephane.waffo@forvismazars.com"
-              className="text-gray-500 transition-colors hover:text-white"
+              className="text-gray-400 transition-colors hover:text-gray-700"
               aria-label="Email"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
