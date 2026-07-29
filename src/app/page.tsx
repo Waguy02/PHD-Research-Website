@@ -8,6 +8,9 @@ const statusBadge: Record<string, { bg: string; text: string; label: string }> =
   in_progress: { bg: "bg-gray-100", text: "text-gray-600", label: "In Progress" },
 };
 
+const basePath =
+  process.env.NODE_ENV === "production" ? "/PHD-Research-Website" : "";
+
 export default function Home() {
   const sortedPapers = [...papers].sort((a, b) => b.year - a.year);
 
@@ -15,23 +18,34 @@ export default function Home() {
     <div className="mx-auto max-w-4xl px-6 py-20">
       {/* Hero */}
       <section className="mb-20">
-        <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
-          Guy Stephane{" "}
-          <span className="gradient-text">Waffo Dzuyo</span>
-        </h1>
-        <p className="mb-2 text-xl text-gray-500">
-          PhD Candidate in Artificial Intelligence
-        </p>
-        <p className="mb-8 text-gray-400">
-          LORIA, CNRS, Universite de Lorraine &middot; Forvis Mazars
-        </p>
-        <p className="max-w-2xl text-base leading-relaxed text-gray-600">
-          My research sits at the intersection of Natural Language Processing,
-          Financial Analysis, and Time-Series Forecasting. I develop AI methods
-          for auditing — classifying companies by industry sector, detecting
-          financial fraud through multimodal analysis, and controlling
-          state-space models with semantic cues.
-        </p>
+        <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start">
+          <div className="shrink-0">
+            <img
+              src={`${basePath}/images/guy-profile.png`}
+              alt="Guy Stephane Waffo Dzuyo"
+              className="h-48 w-48 rounded-2xl object-cover shadow-lg sm:h-56 sm:w-56"
+            />
+          </div>
+          <div>
+            <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
+              Guy Stephane{" "}
+              <span className="gradient-text">Waffo Dzuyo</span>
+            </h1>
+            <p className="mb-2 text-xl text-gray-500">
+              PhD Candidate in Artificial Intelligence
+            </p>
+            <p className="mb-6 text-gray-400">
+              LORIA, CNRS, Universite de Lorraine &middot; Forvis Mazars
+            </p>
+            <p className="max-w-2xl text-base leading-relaxed text-gray-600">
+              My research sits at the intersection of Natural Language Processing,
+              Financial Analysis, and Time-Series Forecasting. I develop AI methods
+              for auditing — classifying companies by industry sector, detecting
+              financial fraud through multimodal analysis, and controlling
+              state-space models with semantic cues.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Research areas */}
