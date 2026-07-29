@@ -181,13 +181,6 @@ export const teamMembers: TeamMember[] = [
 
 export const timelineEvents: TimelineEvent[] = [
   {
-    year: 2024,
-    title: "ECAI 2024 — First Paper Accepted",
-    description:
-      "Paper on semi-automatic auditing via LLM fine-tuning for industry sector prediction accepted at ECAI 2024 Economics and Finance track.",
-    type: "paper",
-  },
-  {
     year: 2025,
     title: "AAAI 2025 — Industry Sector Classification",
     description:
