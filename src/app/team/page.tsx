@@ -1,6 +1,10 @@
+"use client";
 import { teamMembers } from "@/lib/data";
 
 export default function TeamPage() {
+  const basePath = typeof window !== "undefined" && window.location.pathname.startsWith("/PHD-Research-Website")
+    ? "/PHD-Research-Website"
+    : "";
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
       <h1 className="mb-2 text-4xl font-bold tracking-tight">Research Team</h1>
@@ -10,13 +14,17 @@ export default function TeamPage() {
         {teamMembers.map((member) => (
           <div key={member.id} className="rounded-xl border border-gray-200 bg-white p-6 card-hover">
             <div className="mb-4 flex items-center gap-4">
-              <div
-                className={`flex h-16 w-16 items-center justify-center rounded-full text-lg font-bold ${
-                  member.isMainAuthor ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-500"
-                }`}
-              >
-                {member.name.split(" ").map((n) => n[0]).join("")}
-              </div>
+              {member.isMainAuthor ? (
+                <img
+                  src={`${basePath}/images/guy-profile.jpg`}
+                  alt={member.name}
+                  className="h-16 w-16 rounded-full object-cover"
+                />
+              ) : (
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-lg font-bold text-gray-500">
+                  {member.name.split(" ").map((n) => n[0]).join("")}
+                </div>
+              )}
               <div>
                 <h3 className={`text-lg font-semibold ${member.isMainAuthor ? "text-blue-700" : "text-gray-900"}`}>
                   {member.name}
