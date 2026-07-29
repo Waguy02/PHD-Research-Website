@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PhD Research Website — Guy Stephane Waffo Dzuyo
+
+Personal research website showcasing publications, demos, and research in AI for financial auditing.
+
+**Tech Stack:** Next.js (static export) + TypeScript + Tailwind CSS + Recharts
+
+**Hosting:** GitHub Pages via GitHub Actions
+
+## Sections
+
+- **Home** — Research overview and latest publications
+- **Publications** — Accepted papers at AAAI 2025, IJCAI 2026 FINLLM, SemMamba @ NeurIPS 2026
+- **Demo** — Interactive CI-FSFD benchmark explorer for financial fraud detection
+- **Team** — Research group members and affiliations
+- **CV** — Research timeline, skills, and education
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+Static output is in the `out/` directory, ready for GitHub Pages deployment.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+  app/
+    page.tsx            # Home page
+    publications/
+      page.tsx          # Publications list
+      [id]/page.tsx     # Individual paper detail pages
+    demo/page.tsx       # FINLLM benchmark explorer
+    team/page.tsx       # Research team
+    cv/page.tsx         # CV / timeline
+    layout.tsx          # Root layout with Navbar & Footer
+    globals.css         # Global styles & theme
+  components/
+    Navbar.tsx          # Navigation bar
+    Footer.tsx          # Footer with social links
+  lib/
+    data.ts             # All content data (papers, team, timeline, demo)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Adding a New Publication
 
-## Deploy on Vercel
+1. Add the paper metadata to `src/lib/data.ts` in the `papers` array
+2. The publication detail page and list will auto-update (uses `[id]/page.tsx`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pushes to `main` trigger GitHub Actions, which builds and deploys to:
+
+`https://Waguy02.github.io/PHD-Research-Website/`
