@@ -14,9 +14,9 @@ export default function TeamPage() {
         {teamMembers.map((member) => (
           <div key={member.id} className="rounded-xl border border-gray-200 bg-white p-6 card-hover">
             <div className="mb-4 flex items-center gap-4">
-              {member.isMainAuthor ? (
+              {member.image ? (
                 <img
-                  src={`${basePath}/images/guy-profile.jpg`}
+                  src={`${basePath}/images/${member.image}`}
                   alt={member.name}
                   className="h-16 w-16 rounded-full object-cover"
                 />
