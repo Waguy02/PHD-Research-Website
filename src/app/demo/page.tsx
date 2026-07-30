@@ -503,9 +503,9 @@ function DatasetSlideshow() {
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Sample Explorer — Diaporama</h2>
         <div className="flex items-center gap-3">
-          <div className="text-sm text-gray-500">
+          <span className="rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">
             {slideIdx + 1} / {mdaSlides.length}
-          </div>
+          </span>
         </div>
       </div>
 
@@ -522,136 +522,145 @@ function DatasetSlideshow() {
         ))}
       </div>
 
-      {/* Main slide card */}
-      <div
-        className={`rounded-xl border-2 p-6 transition-all ${
-          slide.fraud ? "border-red-300 bg-red-50" : "border-green-300 bg-green-50"
-        }`}
-      >
-        {/* Header row */}
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <span
-              className={`rounded px-2.5 py-1 text-xs font-bold ${
-                slide.fraud
-                  ? "bg-red-200 text-red-800"
-                  : "bg-green-200 text-green-800"
-              }`}
-            >
-              {slide.fraud ? "FRAUD CASE (AAER)" : "NON-FRAUD"}
-            </span>
-            <span className="text-sm font-semibold text-gray-900">{slide.company}</span>
-            <span className="text-xs text-gray-500">CIK {slide.cik}</span>
-          </div>
-          <div className="text-xs text-gray-500">
-            {slide.quarter} · {slide.industry}
-          </div>
-        </div>
+      {/* Main slide card with prev/next arrows flanking it */}
+      <div className="relative flex items-stretch gap-2 sm:gap-3">
+        {/* Previous arrow — left of card */}
+        <button
+          onClick={prevSlide}
+          className="flex shrink-0 items-center justify-center self-center rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow-md"
+          aria-label="Previous slide"
+        >
+          <svg className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
 
-        {/* Content grid: Raw MDA (left) + SMD&A (right) */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Left: Raw MD&A */}
-          <div className="min-w-0">
-            <h3 className="mb-2 text-sm font-semibold text-gray-700">
-              Raw MD&A (Original 10-Q Filing)
-            </h3>
-            <div className="max-h-[500px] overflow-auto rounded-lg border border-gray-200 bg-white p-4">
-              <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700">
-                {slide.rawMDA}
-              </pre>
+        {/* The card */}
+        <div
+          className={`min-w-0 flex-1 rounded-xl border-2 p-6 transition-all ${
+            slide.fraud ? "border-red-300 bg-red-50" : "border-green-300 bg-green-50"
+          }`}
+        >
+          {/* Header row */}
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span
+                className={`rounded px-2.5 py-1 text-xs font-bold ${
+                  slide.fraud
+                    ? "bg-red-200 text-red-800"
+                    : "bg-green-200 text-green-800"
+                }`}
+              >
+                {slide.fraud ? "FRAUD CASE (AAER)" : "NON-FRAUD"}
+              </span>
+              <span className="text-sm font-semibold text-gray-900">{slide.company}</span>
+              <span className="text-xs text-gray-500">CIK {slide.cik}</span>
+            </div>
+            <div className="text-xs text-gray-500">
+              {slide.quarter} · {slide.industry}
             </div>
           </div>
 
-          {/* Right: SMD&A + AAER */}
-          <div className="flex min-w-0 flex-col gap-4">
-            <div>
-              <h3 className="mb-2 text-sm font-semibold text-blue-700">
-                SMD&A (Qwen3-32B Summary)
+          {/* Content grid: Raw MDA (left) + SMD&A (right) — MDA is full height */}
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* Left: Raw MD&A — FULL text, no max-height truncation */}
+            <div className="flex min-w-0 flex-col">
+              <h3 className="mb-2 text-sm font-semibold text-gray-700">
+                Raw MD&A (Original 10-Q Filing)
               </h3>
-              <div className="max-h-[300px] overflow-auto rounded-lg border border-blue-200 bg-white p-4">
+              <div className="rounded-lg border border-gray-200 bg-white p-4">
                 <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700">
-                  {slide.smda}
+                  {slide.rawMDA}
                 </pre>
               </div>
             </div>
 
-            {/* AAER / Fraud details */}
-            <div
-              className={`rounded-lg border p-4 ${
-                slide.fraud ? "border-red-200 bg-red-50" : "border-green-200 bg-green-50"
-              }`}
-            >
-              <h3 className="mb-2 text-sm font-semibold text-gray-800">AAER Disclosure</h3>
-              <p className="mb-2 text-sm leading-relaxed text-gray-700">{slide.aaerSummary}</p>
+            {/* Right: SMD&A + AAER — also no truncation on SMD&A */}
+            <div className="flex min-w-0 flex-col gap-4">
+              <div>
+                <h3 className="mb-2 text-sm font-semibold text-blue-700">
+                  SMD&A (Qwen3-32B Summary)
+                </h3>
+                <div className="rounded-lg border border-blue-200 bg-white p-4">
+                  <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700">
+                    {slide.smda}
+                  </pre>
+                </div>
+              </div>
 
-              {slide.misstatements.length > 0 && (
-                <div className="mb-2">
-                  <span className="text-xs font-medium text-gray-600">Misstatement Types:</span>
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {slide.misstatements.map((mis) => (
-                      <span key={mis} className="rounded bg-white px-2 py-0.5 text-xs text-gray-700">
-                        {mis}
-                      </span>
-                    ))}
+              {/* AAER / Fraud details */}
+              <div
+                className={`rounded-lg border p-4 ${
+                  slide.fraud ? "border-red-200 bg-red-50" : "border-green-200 bg-green-50"
+                }`}
+              >
+                <h3 className="mb-2 text-sm font-semibold text-gray-800">AAER Disclosure</h3>
+                <p className="mb-2 text-sm leading-relaxed text-gray-700">{slide.aaerSummary}</p>
+
+                {slide.misstatements.length > 0 && (
+                  <div className="mb-2">
+                    <span className="text-xs font-medium text-gray-600">Misstatement Types:</span>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {slide.misstatements.map((mis) => (
+                        <span key={mis} className="rounded bg-white px-2 py-0.5 text-xs text-gray-700">
+                          {mis}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {slide.redFlags.length > 0 && (
-                <div>
-                  <span className="text-xs font-medium text-red-600">Red Flags:</span>
-                  <ul className="mt-1 space-y-0.5 text-sm text-red-700">
-                    {slide.redFlags.map((flag) => (
-                      <li key={flag} className="flex items-start gap-1.5">
-                        <span className="mt-0.5 text-red-500">&#9888;</span>
-                        <span>{flag}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                {slide.redFlags.length > 0 && (
+                  <div>
+                    <span className="text-xs font-medium text-red-600">Red Flags:</span>
+                    <ul className="mt-1 space-y-0.5 text-sm text-red-700">
+                      {slide.redFlags.map((flag) => (
+                        <li key={flag} className="flex items-start gap-1.5">
+                          <span className="mt-0.5 text-red-500">&#9888;</span>
+                          <span>{flag}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-              {!slide.fraud && (
-                <p className="text-sm text-green-700">
-                  No misstatements, no enforcement action, clean audit opinion.
-                </p>
-              )}
+                {!slide.fraud && (
+                  <p className="text-sm text-green-700">
+                    No misstatements, no enforcement action, clean audit opinion.
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Navigation buttons */}
-      <div className="flex items-center justify-between">
-        <button
-          onClick={prevSlide}
-          className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 hover:shadow"
-        >
-          &larr; Previous
-        </button>
-
-        <div className="flex flex-wrap gap-1">
-          {mdaSlides.map((s, i) => (
-            <button
-              key={i}
-              onClick={() => setSlideIdx(i)}
-              className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
-                i === slideIdx
-                  ? "border-blue-300 bg-blue-50 text-blue-700"
-                  : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
-              }`}
-            >
-              {s.company.split(/[(,]/)[0].trim().slice(0, 12)}...
-            </button>
-          ))}
-        </div>
-
+        {/* Next arrow — right of card */}
         <button
           onClick={nextSlide}
-          className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 hover:shadow"
+          className="flex shrink-0 items-center justify-center self-center rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow-md"
+          aria-label="Next slide"
         >
-          Next &rarr;
+          <svg className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
         </button>
+      </div>
+
+      {/* Thumbnail strip below */}
+      <div className="flex flex-wrap gap-1.5">
+        {mdaSlides.map((s, i) => (
+          <button
+            key={i}
+            onClick={() => setSlideIdx(i)}
+            className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-all ${
+              i === slideIdx
+                ? "border-blue-300 bg-blue-50 text-blue-700 shadow-sm"
+                : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
+            }`}
+          >
+            {s.company.split(/[(,]/)[0].trim().slice(0, 14)}{s.company.length > 14 ? "..." : ""}
+          </button>
+        ))}
       </div>
 
       <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-center text-xs text-gray-500">
