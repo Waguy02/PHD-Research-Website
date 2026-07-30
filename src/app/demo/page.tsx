@@ -454,8 +454,11 @@ function DatasetSlideshow() {
                   {slide.rawMDA}
                 </pre>
               </div>
-              <div className="mt-1 text-right text-[10px] text-gray-400">
-                Scroll for full text &darr; · {slide.rawMDA.split(" ").length} words
+              <div className="mt-1 flex items-center justify-between text-[10px] text-gray-400">
+                <span>Scroll for full text &darr;</span>
+                <span className="font-medium text-blue-500">
+                  {slide.rawMDA.split(" ").length.toLocaleString()} words &rarr; {slide.smda.split(" ").length.toLocaleString()} words &middot; {(slide.rawMDA.split(" ").length / Math.max(slide.smda.split(" ").length, 1)).toFixed(1)}&times; compression
+                </span>
               </div>
             </div>
 
