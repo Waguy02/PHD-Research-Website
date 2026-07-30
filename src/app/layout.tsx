@@ -69,6 +69,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icons/favicon.svg" />
+        <meta name="theme-color" content="#2563eb" />
+      </head>
       <body className="flex min-h-full flex-col bg-white text-gray-900">
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>
