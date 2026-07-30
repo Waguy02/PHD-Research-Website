@@ -72,12 +72,24 @@ export default function CVPage() {
 
       <section>
         <h2 className="mb-4 text-xl font-semibold">Education</h2>
-        <div className="rounded-xl border border-gray-200 bg-white p-6">
-          <h3 className="mb-1 font-semibold text-gray-900">PhD in Artificial Intelligence</h3>
-          <p className="mb-2 text-sm text-gray-500">LORIA, CNRS, Universite de Lorraine / Forvis Mazars</p>
-          <p className="text-sm text-gray-400">
-            Researching AI methods for financial auditing, combining NLP, structured data analysis, and time-series forecasting.
-          </p>
+        <div className="space-y-4">
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
+            <h3 className="mb-1 font-semibold text-gray-900">PhD in Artificial Intelligence</h3>
+            <p className="mb-2 text-sm text-gray-500">LORIA, CNRS, Universite de Lorraine / Forvis Mazars</p>
+            <p className="mb-2 text-sm text-gray-500">CIFRE Agreement &middot; 2024 - Present</p>
+            <p className="text-sm text-gray-400">
+              Researching AI methods for financial auditing, combining NLP and structured data analysis for industry classification and fraud detection using multimodal LLMs.
+            </p>
+          </div>
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
+            <h3 className="mb-1 font-semibold text-gray-900">
+              Engineering Degree — Mathematical Modelling, Data Science & AI
+            </h3>
+            <p className="mb-2 text-sm text-gray-500">Grenoble INP - Ensimag</p>
+            <p className="text-sm text-gray-400">
+              Graduated with a diploma in mathematical modelling, data science and artificial intelligence.
+            </p>
+          </div>
         </div>
       </section>
     </div>

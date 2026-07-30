@@ -161,6 +161,20 @@ export const teamMembers: TeamMember[] = [
 
 export const timelineEvents: TimelineEvent[] = [
   {
+    year: 2023,
+    title: "Engineering Degree — Grenoble INP - Ensimag",
+    description:
+      "Graduated with a diploma in Mathematical Modelling, Data Science and Artificial Intelligence from Grenoble INP - Ensimag.",
+    type: "education",
+  },
+  {
+    year: 2024,
+    title: "Started CIFRE PhD at LORIA / Forvis Mazars",
+    description:
+      "Began PhD research on AI for financial auditing, combining NLP and structured data analysis for industry classification and fraud detection.",
+    type: "education",
+  },
+  {
     year: 2025,
     title: "AAAI 2025 — Industry Sector Classification",
     description:
