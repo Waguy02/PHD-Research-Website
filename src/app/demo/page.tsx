@@ -96,7 +96,7 @@ const loraConfig = {
   alpha: 8,
   dropout: 0.05,
   targetModules: ["q_proj", "v_proj", "up_proj", "down_proj", "gate_proj", "lm_head"],
-  baseModels: ["FinO-18B (4-bit NF4)", "Llama-3.1-8B", "FinO-8B", "FinO-14B"],
+  baseModels: ["Fino1-8B (4-bit NF4)", "Llama-3.1-8B", "FinO-8B", "FinO-14B"],
   epochs: 10,
   learningRate: "1e-4",
   batchSize: 8,
@@ -566,7 +566,7 @@ function ArchitectureSection() {
       {/* Large SVG architecture schematic */}
       <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-8">
         <h2 className="mb-6 text-center text-xl font-semibold">Fine-tuning Architecture — Flow Overview</h2>
-        <svg viewBox="0 0 900 520" className="w-full max-w-4xl mx-auto" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <svg viewBox="0 0 900 560" className="w-full max-w-4xl mx-auto" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
           <defs>
             <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
               <path d="M0,0 L8,3 L0,6" fill="#94a3b8"/>
@@ -582,14 +582,14 @@ function ArchitectureSection() {
 
           <line x1="210" y1="70" x2="246" y2="70" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowR)"/>
 
-          {/* ====== BOX 2: FinO-18B + LoRA ====== */}
+          {/* ====== BOX 2: Fino1-8B + LoRA ====== */}
           <rect x="250" y="20" width="260" height="100" rx="10" fill="#eef2ff" stroke="#a5b4fc" strokeWidth="2"/>
           <rect x="256" y="26" width="248" height="30" rx="6" fill="#c7d2fe"/>
-          <text x="380" y="46" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">FinO-18B + LoRA</text>
+          <text x="380" y="46" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">Fino1-8B + LoRA</text>
           <text x="380" y="68" textAnchor="middle" fontSize="10" fill="#475569">Frozen backbone · LoRA adapters</text>
           <text x="380" y="84" textAnchor="middle" fontSize="9" fill="#64748b">r=8, &alpha;=8, dropout=0.05, lr=1e-4</text>
           <text x="380" y="98" textAnchor="middle" fontSize="9" fill="#64748b">Target: q,v,gate,up,down,lm_head</text>
-          <text x="380" y="112" textAnchor="middle" fontSize="8" fill="#94a3b8">4-bit NF4 · 18B params</text>
+          <text x="380" y="112" textAnchor="middle" fontSize="8" fill="#94a3b8">4-bit NF4 · 8B params</text>
 
           <line x1="510" y1="70" x2="546" y2="70" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowR)"/>
 
@@ -653,6 +653,12 @@ function ArchitectureSection() {
           {/* ====== OTHER MODELS COMPARED ====== */}
           <rect x="100" y="405" width="700" height="40" rx="10" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
           <text x="450" y="423" textAnchor="middle" fontSize="10" fontWeight="600" fill="#475569">Other base models compared: Llama-3.1 8B · FinO-8B · FinO-14B</text>
+          <text x="450" y="455" textAnchor="middle" fontSize="9" fill="#94a3b8">Affiliations: Forvis Mazars · LORIA (CNRS, Universite de Lorraine) · LIPN (CNRS, Universite Sorbonne Paris Nord)</text>
+
+          {/* ====== LOGOS ROW ====== */}
+          <image href="/images/logos/logo-forvis-mazars-title.jpeg" x="230" y="480" height="28" preserveAspectRatio="xMidYMid meet"/>
+          <image href="/images/logos/logo-loria.png" x="430" y="475" height="36" preserveAspectRatio="xMidYMid meet"/>
+          <image href="/images/logos/logo-university.png" x="550" y="475" height="38" preserveAspectRatio="xMidYMid meet"/>
           <text x="450" y="438" textAnchor="middle" fontSize="9" fill="#94a3b8">All use the same LoRA (r=8, &alpha;=8) and softmax head setup</text>
         </svg>
       </div>
@@ -684,7 +690,7 @@ function ArchitectureSection() {
             <span className="mb-2 block text-xs font-medium text-gray-500">Base Models</span>
             <div className="flex flex-wrap gap-1.5">
               {loraConfig.baseModels.map((m) => (
-                <span key={m} className={"rounded-lg border px-2.5 py-1 text-xs font-medium " + (m.includes("FinO-18B") ? "border-pink-300 bg-pink-50 text-pink-700" : "border-indigo-200 bg-indigo-50 text-indigo-700")}>{m}</span>
+                <span key={m} className={"rounded-lg border px-2.5 py-1 text-xs font-medium " + (m.includes("Fino1-8B") ? "border-pink-300 bg-pink-50 text-pink-700" : "border-indigo-200 bg-indigo-50 text-indigo-700")}>{m}</span>
               ))}
             </div>
           </div>
