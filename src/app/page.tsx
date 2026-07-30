@@ -46,16 +46,16 @@ export default function Home() {
 
             <div className="mb-6 grid grid-cols-3 gap-6 text-center sm:grid-cols-3">
               <div>
-                <div className="text-2xl font-bold text-gray-900">2</div>
+                <div className="text-2xl font-bold text-gray-900">3</div>
                 <div className="text-xs text-gray-400">Papers</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-gray-900">1</div>
+                <div className="text-2xl font-bold text-gray-900">2</div>
                 <div className="text-xs text-gray-400">Published</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-gray-900">1</div>
-                <div className="text-xs text-gray-400">Accepted</div>
+                <div className="text-xs text-gray-400">Under Review</div>
               </div>
             </div>
 
@@ -168,6 +168,55 @@ export default function Home() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="mt-20">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-8">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-900">Get in Touch</h2>
+          <p className="mb-6 text-gray-500">
+            Interested in collaborating or have questions about my research? Feel free to reach out.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <h3 className="mb-2 font-medium text-gray-900">Email</h3>
+              <p className="text-sm text-gray-500">
+                <a href="mailto:guy.stephane.waffo@forvismazars.com" className="text-blue-600 hover:underline">
+                  guy.stephane.waffo@forvismazars.com
+                </a>
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-2 font-medium text-gray-900">Affiliations</h3>
+              <ul className="space-y-1 text-sm text-gray-500">
+                <li>LORIA, CNRS, Universite de Lorraine</li>
+                <li>Forvis Mazars</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-2 font-medium text-gray-900">GitHub</h3>
+              <a
+                href="https://github.com/Waguy02"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                github.com/Waguy02
+              </a>
+            </div>
+            <div>
+              <h3 className="mb-2 font-medium text-gray-900">Scholar</h3>
+              <a
+                href="https://scholar.google.com/citations?hl=fr&user=j21NBlEAAAAJ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Google Scholar Profile
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -115,6 +115,30 @@ export const papers: Paper[] = [
       "Zero-shot LLMs perform at chance (~0.50 AUC)",
     ],
   },
+  {
+    id: "semmamba-neurips-2026",
+    title:
+      "SemMamba: State Space Models for Financial Statement Analysis",
+    venue: "NeurIPS 2026",
+    year: 2026,
+    status: "in_review",
+    tags: ["under_review", "NeurIPS", "state space models", "financial NLP", "Mamba"],
+    authors: [
+      "Guy Stephane Waffo Dzuyo",
+      "Gael Guibon",
+      "Christophe Cerisara",
+      "Luis Belmar-Letelier",
+    ],
+    abstract:
+      "We introduce SemMamba, a novel architecture leveraging State Space Models (SSMs) — specifically the Mamba architecture — for financial statement analysis. Unlike Transformers, Mamba models achieve linear-time inference and selective sequence modeling, making them ideal for long financial documents. We adapt Mamba to jointly process structured financial indicators and unstructured MD&A text, enabling efficient fraud detection at scale. Our experiments show competitive performance against LLM-based approaches while significantly reducing computational cost.",
+    links: [],
+    keyResults: [
+      "Mamba architecture adapted for financial statement analysis",
+      "Linear-time inference vs quadratic in Transformers",
+      "Selective sequence modeling for long financial documents",
+      "Joint processing of structured + unstructured financial data",
+    ],
+  },
 ];
 
 export const teamMembers: TeamMember[] = [
@@ -190,9 +214,9 @@ export const timelineEvents: TimelineEvent[] = [
   },
   {
     year: 2026,
-    title: "ForensicBench @ EMNLP 2026 (Under Review)",
+    title: "SemMamba @ NeurIPS 2026 (Under Review)",
     description:
-      "Submitted to EMNLP 2026: First benchmark for evaluating agentic LLMs on journal-entry fraud detection.",
+      "Submitted to NeurIPS 2026: State Space Models (Mamba) for efficient financial statement analysis and fraud detection.",
     type: "paper",
   },
 ];
