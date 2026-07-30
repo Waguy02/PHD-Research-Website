@@ -38,11 +38,10 @@ export default function Home() {
               LORIA, CNRS, Universite de Lorraine &middot; Forvis Mazars
             </p>
             <p className="max-w-2xl text-base leading-relaxed text-gray-600">
-              My research sits at the intersection of Natural Language Processing,
-              Financial Analysis, and Time-Series Forecasting. I develop AI methods
-              for auditing — classifying companies by industry sector, detecting
-              financial fraud through multimodal analysis, and controlling
-              state-space models with semantic cues.
+              My research sits at the intersection of Natural Language Processing
+              and Financial Analysis. I develop AI methods for auditing —
+              classifying companies by industry sector and detecting financial
+              fraud through multimodal LLM-based analysis.
             </p>
           </div>
         </div>
@@ -67,10 +66,10 @@ export default function Home() {
             </p>
           </div>
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 card-hover">
-            <h3 className="mb-2 font-semibold text-gray-900">Time-Series Forecasting</h3>
+            <h3 className="mb-2 font-semibold text-gray-900">Financial NLP</h3>
             <p className="text-sm leading-relaxed text-gray-500">
-              Semantic control of state-space models for multimodal
-              forecasting at linear-time complexity.
+              Leveraging LLMs and hybrid models to extract insights from
+              unstructured financial text and MD&A reports.
             </p>
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://scholar.google.com/"
+              href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-colors hover:text-gray-700"
@@ -32,7 +32,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/"
+              href="https://linkedin.com/in/waguy02"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-colors hover:text-gray-700"

@@ -101,11 +101,11 @@ export const papers: Paper[] = [
     links: [
       {
         label: "arXiv",
-        url: "#",
+        url: "https://arxiv.org/abs/2607.19259",
       },
       {
-        label: "Dataset",
-        url: "#",
+        label: "Code & Dataset (GitHub)",
+        url: "https://github.com/WaguyMz/Financial-Statements-Fraud-Detection",
       },
     ],
     keyResults: [
@@ -113,35 +113,6 @@ export const papers: Paper[] = [
       "Random split inflates AUC to 0.96 — company-isolated evaluation is essential",
       "Text-only SMD&A outperforms combined FIN+SMD&A (noise bottleneck)",
       "Zero-shot LLMs perform at chance (~0.50 AUC)",
-    ],
-  },
-  {
-    id: "semmamba-neurips-2026",
-    title:
-      "SemMamba: Semantic Control by Dynamic Modulation for Time-Series Forecasting",
-    venue: "NeurIPS 2026",
-    year: 2026,
-    status: "in_review",
-    tags: ["under review", "NeurIPS", "time-series", "Mamba", "multimodal"],
-    authors: [
-      "Guy Stephane Waffo Dzuyo",
-      "Gael Guibon",
-      "Christophe Cerisara",
-      "Luis Belmar-Letelier",
-    ],
-    abstract:
-      "We address multimodal time-series forecasting where numerical series are paired with aligned text. We propose SemMamba, a text-conditioned operator-modulation method for State Space Models (Mamba). Our method uses semantic cues to dynamically scale Mamba's selective-scan coefficients (Delta, B, C) via a bounded multiplicative residual. SemMamba achieves the best average CRPS rank across 11 text-paired probabilistic forecasting benchmarks at linear-time complexity. The key insight is that text conditions the operators of the sequence model rather than augmenting its inputs — a feature-wise conditional computation approach (like FiLM) applied inside a state-space recurrence.",
-    links: [
-      {
-        label: "Anonymous Code",
-        url: "https://anonymous.4open.science/r/SemMamba_NeurIPS-C9E7",
-      },
-    ],
-    keyResults: [
-      "Best average CRPS rank across 11 text-paired forecasting benchmarks",
-      "Linear-time complexity (O(n)) — efficient for long sequences",
-      "Text conditions Mamba operators, not inputs — novel FiLM-like mechanism",
-      "Bounded multiplicative residual enables stable training",
     ],
   },
 ];
@@ -153,7 +124,7 @@ export const teamMembers: TeamMember[] = [
     role: "PhD Candidate",
     affiliation: "LORIA, CNRS, Universite de Lorraine / Forvis Mazars",
     email: "guy.stephane.waffo@forvismazars.com",
-    bio: "PhD candidate researching AI for financial auditing at the intersection of NLP and financial statement analysis. Focused on industry classification, fraud detection, and multimodal time-series forecasting with state-space models.",
+    bio: "PhD candidate researching AI for financial auditing at the intersection of NLP and financial statement analysis. Focused on industry classification and fraud detection using multimodal LLMs.",
     isMainAuthor: true,
     image: "guy-profile.png",
   },
@@ -201,13 +172,6 @@ export const timelineEvents: TimelineEvent[] = [
     title: "IJCAI 2026 FINLLM — Fraud Detection Benchmark",
     description:
       "Accepted at IJCAI-ECAI 2026 FINLLM Workshop: CI-FSFD benchmark for robust evaluation of financial statement fraud detection.",
-    type: "paper",
-  },
-  {
-    year: 2026,
-    title: "NeurIPS 2026 — SemMamba (Under Review)",
-    description:
-      "Submitted to NeurIPS 2026: Semantic control of state-space dynamics for multimodal time-series forecasting.",
     type: "paper",
   },
   {

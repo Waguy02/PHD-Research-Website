@@ -12,11 +12,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Guy Stephane Waffo Dzuyo — PhD Research",
   description:
-    "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial Fraud Detection, and Multimodal Time-Series Forecasting.",
+    "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial NLP, and Financial Fraud Detection using LLMs.",
   openGraph: {
     title: "Guy Stephane Waffo Dzuyo — PhD Research",
     description:
-      "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial Fraud Detection, and Multimodal Time-Series Forecasting.",
+      "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial NLP, and Financial Fraud Detection using LLMs.",
     type: "website",
   },
 };
