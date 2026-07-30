@@ -96,7 +96,7 @@ const loraConfig = {
   alpha: 8,
   dropout: 0.05,
   targetModules: ["q_proj", "v_proj", "up_proj", "down_proj", "gate_proj", "lm_head"],
-  baseModels: ["Llama-3.1-8B (4-bit)", "FinO-8B", "FinO-14B", "Qwen-32B"],
+  baseModels: ["FinO-18B (4-bit NF4)", "Llama-3.1-8B", "FinO-8B", "FinO-14B"],
   epochs: 10,
   learningRate: "1e-4",
   batchSize: 8,
@@ -627,66 +627,51 @@ function ArchitectureSection() {
           {/* Arrow input&#8594;LLM */}
           <line x1="200" y1="230" x2="200" y2="265" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
 
-          {/* ====== SECTION 2: BASE LLM (center) ====== */}
-          <rect x="30" y="270" width="480" height="220" rx="12" fill="url(#gradLLM)" stroke="#a5b4fc" strokeWidth="1.5" filter="url(#shadow2)"/>
-          <text x="270" y="295" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">BASE LLM — Pretrained Backbone</text>
+          {/* ====== SECTION 2: FinO-18B + LoRA (single merged box) ====== */}
+          <rect x="30" y="270" width="840" height="240" rx="12" fill="url(#gradLLM)" stroke="#a5b4fc" strokeWidth="1.5" filter="url(#shadow2)"/>
+          <text x="450" y="295" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">FinO-18B + LoRA (Fine-Tuning Setup)</text>
 
-          {/* Model selector */}
-          <rect x="50" y="310" width="140" height="70" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
-          <text x="120" y="330" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">Base Models</text>
-          <text x="120" y="347" textAnchor="middle" fontSize="9" fill="#64748b">Fino1-8B</text>
-          <text x="120" y="360" textAnchor="middle" fontSize="9" fill="#64748b">Llama-3.1 8B</text>
-          <text x="120" y="373" textAnchor="middle" fontSize="9" fill="#64748b">Qwen3-32B</text>
+          {/* Left half: Base model info */}
+          <rect x="50" y="312" width="380" height="60" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
+          <text x="240" y="332" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">FinO-18B — Finance-Optimized LLM (frozen backbone)</text>
+          <text x="240" y="350" textAnchor="middle" fontSize="9" fill="#64748b">18B parameters | 4-bit NF4 quantization | Pretrained on financial corpus</text>
+          <text x="240" y="366" textAnchor="middle" fontSize="8" fill="#94a3b8">Compared: Llama-3.1 8B, FinO-8B, FinO-14B</text>
 
-          {/* 4-bit */}
-          <rect x="210" y="310" width="120" height="70" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
-          <text x="270" y="330" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">Quantization</text>
-          <text x="270" y="350" textAnchor="middle" fontSize="11" fontWeight="700" fill="#059669">4-bit NF4</text>
-          <text x="270" y="368" textAnchor="middle" fontSize="9" fill="#64748b">GPTQ quantization</text>
+          {/* Left bottom: Transformer layers */}
+          <rect x="50" y="382" width="380" height="50" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
+          <text x="240" y="400" textAnchor="middle" fontSize="9" fontWeight="600" fill="#4338ca">Transformer Layers</text>
+          <rect x="65" y="412" width="350" height="14" rx="4" fill="#eef2ff" stroke="#c7d2fe" strokeWidth="1"/>
+          <text x="70" y="423" fontSize="8" fill="#6366f1">self-attn → norm → FFN → norm</text>
+          <text x="300" y="423" fontSize="8" fill="#94a3b8">32 layers (frozen)</text>
 
-          {/* Hidden layers */}
-          <rect x="50" y="390" width="440" height="90" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
-          <text x="270" y="410" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">Transformer Layers (Hidden)</text>
+          {/* Right half: LoRA Adapters */}
+          <rect x="450" y="312" width="400" height="188" rx="8" fill="url(#gradLora)" stroke="#f9a8d4" strokeWidth="1"/>
+          <text x="650" y="332" textAnchor="middle" fontSize="11" fontWeight="700" fill="#be185d">LoRA ADAPTERS (Trainable Parameters)</text>
 
-          {/* Layer blocks */}
-          {[0,1,2,3].map((i) => (
-            <rect key={i} x={65 + i*106} y={420} width="96" height="24" rx="4" fill="#eef2ff" stroke="#c7d2fe" strokeWidth="1"/>
-          ))}
-          <text x="270" y="434" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6366f1">self-attn</text>
-          {[0,1,2,3].map((i) => (
-            <text key={i} x={65 + i*106 + 48} y="450" textAnchor="middle" fontSize="8" fill="#94a3b8">Layer {i+1}</text>
-          ))}
-          <text x="462" y="440" fontSize="10" fill="#94a3b8">...</text>
+          {/* LoRA hyperparams line */}
+          <text x="650" y="352" textAnchor="middle" fontSize="9" fill="#64748b">rank r = 8 | &#x3b1; = 8 | dropout = 0.05 | lr = 1e-4</text>
 
-          {/* ====== SECTION 3: LORA ADAPTERS (right, beside LLM) ====== */}
-          <rect x="530" y="270" width="340" height="220" rx="12" fill="url(#gradLora)" stroke="#f9a8d4" strokeWidth="1.5" filter="url(#shadow2)"/>
-          <text x="700" y="295" textAnchor="middle" fontSize="12" fontWeight="700" fill="#be185d">LoRA ADAPTERS (Trainable)</text>
-
-          {/* LoRA params */}
-          <rect x="550" y="310" width="300" height="50" rx="8" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
-          <text x="560" y="328" fontSize="10" fontWeight="600" fill="#be185d">LoRA Hyperparameters</text>
-          <text x="560" y="345" fontSize="9" fill="#64748b">r = 8 | &#x3b1; = 8 | dropout = 0.05 | lr = 1e-4</text>
-
-          {/* Target modules */}
-          <rect x="550" y="370" width="300" height="110" rx="8" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
-          <text x="700" y="390" textAnchor="middle" fontSize="10" fontWeight="600" fill="#be185d">Target Modules (Linear Layers)</text>
-
+          {/* Target modules grid */}
+          <rect x="465" y="362" width="370" height="64" rx="6" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
+          <text x="650" y="380" textAnchor="middle" fontSize="9" fontWeight="600" fill="#be185d">Target Modules (Linear Layers)</text>
           {["q_proj", "v_proj", "gate_proj", "up_proj", "down_proj", "lm_head"].map((mod, i) => (
-            <rect key={i} x={560 + (i%2)*140} y={400 + Math.floor(i/2)*24} width="130" height="20" rx="4" fill="#fdf2f8" stroke="#fbcfe8" strokeWidth="1"/>
+            <rect key={i} x={475 + (i%3)*120} y={388 + Math.floor(i/3)*16} width="110" height="13" rx="3" fill="#fdf2f8" stroke="#fbcfe8" strokeWidth="1"/>
           ))}
-          <text x="562" y="414" fontSize="8" fontWeight="600" fill="#be185d">q_proj</text>
-          <text x="702" y="414" fontSize="8" fontWeight="600" fill="#be185d">v_proj</text>
-          <text x="562" y="438" fontSize="8" fontWeight="600" fill="#be185d">gate_proj</text>
-          <text x="702" y="438" fontSize="8" fontWeight="600" fill="#be185d">up_proj</text>
-          <text x="562" y="462" fontSize="8" fontWeight="600" fill="#be185d">down_proj</text>
-          <text x="702" y="462" fontSize="8" fontWeight="600" fill="#be185d">lm_head</text>
+          <text x={475 + 55} y="399" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">q_proj</text>
+          <text x={595 + 55} y="399" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">v_proj</text>
+          <text x={715 + 55} y="399" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">gate_proj</text>
+          <text x={475 + 55} y="415" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">up_proj</text>
+          <text x={595 + 55} y="415" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">down_proj</text>
+          <text x={715 + 55} y="415" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">lm_head</text>
 
-          {/* Arrow LLM &#8594; LoRA */}
-          <line x1="510" y1="380" x2="530" y2="380" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowRight)"/>
+          {/* LoRA params row */}
+          <rect x="465" y="434" width="370" height="56" rx="6" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
+          <text x="650" y="452" textAnchor="middle" fontSize="9" fontWeight="600" fill="#be185d">Training Configuration</text>
+          <text x="650" y="468" textAnchor="middle" fontSize="8" fill="#64748b">10 epochs | Batch 8 | AdamW | Mixed bfloat16 | H100 GPU | ~4h per fold</text>
+          <text x="650" y="482" textAnchor="middle" fontSize="7" fill="#94a3b8">Auto-continue training from best checkpoint | Gradient checkpointing (Unsloth)</text>
 
-          {/* Arrow LLM+LoRA &#8594; Head */}
-          <line x1="510" y1="480" x2="510" y2="510" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
-          <line x1="510" y1="480" x2="700" y2="510" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
+          {/* Arrow FinO+LoRA &#8594; Head */}
+          <line x1="450" y1="510" x2="470" y2="525" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
 
           {/* ====== SECTION 4: CLASSIFICATION HEAD (center-bottom) ====== */}
           <rect x="240" y="515" width="460" height="130" rx="12" fill="url(#gradHead)" stroke="#6ee7b7" strokeWidth="1.5" filter="url(#shadow2)"/>
@@ -773,14 +758,13 @@ function ArchitectureSection() {
 
           {[
             { c: "#bfdbfe", t: "Input Data (FIN + SMD&A)" },
-            { c: "#c7d2fe", t: "Base LLM Backbone (frozen)" },
-            { c: "#fbcfe8", t: "LoRA Adapters (trainable parameters)" },
+            { c: "#c7d2fe", t: "FinO-18B + LoRA (frozen backbone + trainable)" },
             { c: "#a7f3d0", t: "Classification Head (softmax + training mechanics)" },
             { c: "#fde68a", t: "Output & Evaluation (binary + metrics)" },
           ].map((item, i) => (
             <g key={i}>
-              <rect x={60 + i*215} y={880} width="205" height="16" rx="4" fill={item.c} stroke="#e2e8f0" strokeWidth="1"/>
-              <text x={162 + i*215} y="892" textAnchor="middle" fontSize="8" fontWeight="500" fill="#334155">{item.t}</text>
+              <rect x={60 + i*268} y={880} width="258" height="16" rx="4" fill={item.c} stroke="#e2e8f0" strokeWidth="1"/>
+              <text x={189 + i*268} y="892" textAnchor="middle" fontSize="8" fontWeight="500" fill="#334155">{item.t}</text>
             </g>
           ))}
         </svg>
@@ -813,7 +797,7 @@ function ArchitectureSection() {
             <span className="mb-2 block text-xs font-medium text-gray-500">Base Models</span>
             <div className="flex flex-wrap gap-1.5">
               {loraConfig.baseModels.map((m) => (
-                <span key={m} className="rounded-lg border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">{m}</span>
+                <span key={m} className={"rounded-lg border px-2.5 py-1 text-xs font-medium " + (m.includes("FinO-18B") ? "border-pink-300 bg-pink-50 text-pink-700" : "border-indigo-200 bg-indigo-50 text-indigo-700")}>{m}</span>
               ))}
             </div>
           </div>
