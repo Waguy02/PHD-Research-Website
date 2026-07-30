@@ -565,211 +565,95 @@ function ArchitectureSection() {
     <section className="space-y-8">
       {/* Large SVG architecture schematic */}
       <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-8">
-        <h2 className="mb-6 text-center text-xl font-semibold">LoRA Fine-tuning Architecture — Schematic Overview</h2>
-        <svg viewBox="0 0 1160 960" className="w-full max-w-5xl mx-auto" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <h2 className="mb-6 text-center text-xl font-semibold">Fine-tuning Architecture — Flow Overview</h2>
+        <svg viewBox="0 0 900 520" className="w-full max-w-4xl mx-auto" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
           <defs>
-            <filter id="shadow1" x="-4%" y="-4%" width="108%" height="112%">
-              <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.1"/>
-            </filter>
-            <filter id="shadow2" x="-4%" y="-4%" width="108%" height="112%">
-              <feDropShadow dx="0" dy="3" stdDeviation="4" floodOpacity="0.15"/>
-            </filter>
-            <marker id="arrowDown" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
-              <path d="M0,0 L10,4 L0,8" fill="#64748b"/>
+            <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L8,3 L0,6" fill="#94a3b8"/>
             </marker>
-            <marker id="arrowDownBlue" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
-              <path d="M0,0 L10,4 L0,8" fill="#2563eb"/>
-            </marker>
-            <marker id="arrowRight" markerWidth="10" markerHeight="8" refX="3" refY="4" orient="auto">
-              <path d="M0,0 L10,4 L0,8" fill="#64748b"/>
-            </marker>
-            <linearGradient id="gradInput" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#dbeafe"/>
-              <stop offset="100%" stopColor="#bfdbfe"/>
-            </linearGradient>
-            <linearGradient id="gradLLM" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#e0e7ff"/>
-              <stop offset="100%" stopColor="#c7d2fe"/>
-            </linearGradient>
-            <linearGradient id="gradLora" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#fce7f3"/>
-              <stop offset="100%" stopColor="#fbcfe8"/>
-            </linearGradient>
-            <linearGradient id="gradHead" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#d1fae5"/>
-              <stop offset="100%" stopColor="#a7f3d0"/>
-            </linearGradient>
-            <linearGradient id="gradOutput" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#fef3c7"/>
-              <stop offset="100%" stopColor="#fde68a"/>
-            </linearGradient>
           </defs>
 
-          {/* Background */}
-          <rect x="0" y="0" width="1160" height="960" rx="16" fill="white"/>
+          {/* ====== BOX 1: INPUT ====== */}
+          <rect x="30" y="30" width="180" height="80" rx="10" fill="#eff6ff" stroke="#93c5fd" strokeWidth="2"/>
+          <text x="120" y="57" textAnchor="middle" fontSize="12" fontWeight="700" fill="#1d4ed8">INPUT</text>
+          <text x="120" y="75" textAnchor="middle" fontSize="10" fill="#475569">FIN (122 features)</text>
+          <text x="120" y="90" textAnchor="middle" fontSize="10" fill="#475569">+ SMD&amp;A (Qwen summary)</text>
+          <text x="120" y="105" textAnchor="middle" fontSize="9" fill="#94a3b8">serialized into prompt</text>
 
-          {/* ====== SECTION 1: INPUT (top-left) ====== */}
-          <rect x="30" y="40" width="340" height="190" rx="12" fill="url(#gradInput)" stroke="#93c5fd" strokeWidth="1.5" filter="url(#shadow1)"/>
-          <text x="200" y="65" textAnchor="middle" fontSize="12" fontWeight="700" fill="#1d4ed8">INPUT PREPARATION</text>
+          <line x1="210" y1="70" x2="246" y2="70" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowR)"/>
 
-          {/* Financial features */}
-          <rect x="50" y="80" width="300" height="44" rx="6" fill="white" stroke="#bfdbfe" strokeWidth="1"/>
-          <text x="60" y="100" fontSize="10" fontWeight="600" fill="#475569">Financial Indicators (FIN)</text>
-          <text x="60" y="115" fontSize="9" fill="#94a3b8">122 engineered features: ratios, M-score, accruals, R&amp;D intensity</text>
+          {/* ====== BOX 2: FinO-18B + LoRA ====== */}
+          <rect x="250" y="20" width="260" height="100" rx="10" fill="#eef2ff" stroke="#a5b4fc" strokeWidth="2"/>
+          <rect x="256" y="26" width="248" height="30" rx="6" fill="#c7d2fe"/>
+          <text x="380" y="46" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">FinO-18B + LoRA</text>
+          <text x="380" y="68" textAnchor="middle" fontSize="10" fill="#475569">Frozen backbone · LoRA adapters</text>
+          <text x="380" y="84" textAnchor="middle" fontSize="9" fill="#64748b">r=8, &alpha;=8, dropout=0.05, lr=1e-4</text>
+          <text x="380" y="98" textAnchor="middle" fontSize="9" fill="#64748b">Target: q,v,gate,up,down,lm_head</text>
+          <text x="380" y="112" textAnchor="middle" fontSize="8" fill="#94a3b8">4-bit NF4 · 18B params</text>
 
-          {/* Text features */}
-          <rect x="50" y="132" width="300" height="44" rx="6" fill="white" stroke="#bfdbfe" strokeWidth="1"/>
-          <text x="60" y="152" fontSize="10" fontWeight="600" fill="#475569">Summarized MD&amp;A (SMD&amp;A)</text>
-          <text x="60" y="167" fontSize="9" fill="#94a3b8">Qwen3-32B summary (avg ~3,800 tokens, 11 sections)</text>
+          <line x1="510" y1="70" x2="546" y2="70" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowR)"/>
 
-          {/* Serialized prompt */}
-          <rect x="50" y="184" width="300" height="38" rx="6" fill="#eff6ff" stroke="#93c5fd" strokeWidth="1" strokeDasharray="4,3"/>
-          <text x="60" y="202" fontSize="10" fontWeight="600" fill="#1d4ed8">Serialized Prompt</text>
-          <text x="60" y="215" fontSize="9" fill="#64748b">{"\"Industry: {s} | Financials: {122 features} | {SMDA}\""}</text>
+          {/* ====== BOX 3: CLASSIFICATION HEAD ====== */}
+          <rect x="550" y="20" width="180" height="100" rx="10" fill="#f0fdf4" stroke="#6ee7b7" strokeWidth="2"/>
+          <rect x="556" y="26" width="168" height="30" rx="6" fill="#a7f3d0"/>
+          <text x="640" y="46" textAnchor="middle" fontSize="12" fontWeight="700" fill="#059669">CLASSIFICATION</text>
+          <text x="640" y="68" textAnchor="middle" fontSize="10" fill="#475569">Softmax (last token)</text>
+          <text x="640" y="84" textAnchor="middle" fontSize="9" fill="#64748b">Cross-entropy loss</text>
+          <text x="640" y="98" textAnchor="middle" fontSize="9" fill="#64748b">All other tokens masked</text>
+          <text x="640" y="112" textAnchor="middle" fontSize="8" fill="#94a3b8">YES (fraud) / NO (clean)</text>
 
-          {/* Arrow input&#8594;LLM */}
-          <line x1="200" y1="230" x2="200" y2="265" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
+          <line x1="730" y1="70" x2="766" y2="70" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowR)"/>
 
-          {/* ====== SECTION 2: FinO-18B + LoRA (single merged box) ====== */}
-          <rect x="30" y="270" width="840" height="240" rx="12" fill="url(#gradLLM)" stroke="#a5b4fc" strokeWidth="1.5" filter="url(#shadow2)"/>
-          <text x="450" y="295" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">FinO-18B + LoRA (Fine-Tuning Setup)</text>
+          {/* ====== BOX 4: OUTPUT ====== */}
+          <rect x="770" y="30" width="110" height="80" rx="10" fill="#fffbeb" stroke="#fcd34d" strokeWidth="2"/>
+          <text x="825" y="57" textAnchor="middle" fontSize="12" fontWeight="700" fill="#b45309">OUTPUT</text>
+          <text x="825" y="78" textAnchor="middle" fontSize="10" fill="#475569">Fraud / Clean</text>
+          <text x="825" y="95" textAnchor="middle" fontSize="9" fill="#64748b">AUC · F1</text>
 
-          {/* Left half: Base model info */}
-          <rect x="50" y="312" width="380" height="60" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
-          <text x="240" y="332" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">FinO-18B — Finance-Optimized LLM (frozen backbone)</text>
-          <text x="240" y="350" textAnchor="middle" fontSize="9" fill="#64748b">18B parameters | 4-bit NF4 quantization | Pretrained on financial corpus</text>
-          <text x="240" y="366" textAnchor="middle" fontSize="8" fill="#94a3b8">Compared: Llama-3.1 8B, FinO-8B, FinO-14B</text>
+          {/* ====== MIDDLE ROW: Training Config ====== */}
+          <rect x="100" y="160" width="700" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5"/>
+          <text x="450" y="182" textAnchor="middle" fontSize="11" fontWeight="700" fill="#334155">Training Configuration</text>
 
-          {/* Left bottom: Transformer layers */}
-          <rect x="50" y="382" width="380" height="50" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
-          <text x="240" y="400" textAnchor="middle" fontSize="9" fontWeight="600" fill="#4338ca">Transformer Layers</text>
-          <rect x="65" y="412" width="350" height="14" rx="4" fill="#eef2ff" stroke="#c7d2fe" strokeWidth="1"/>
-          <text x="70" y="423" fontSize="8" fill="#6366f1">self-attn → norm → FFN → norm</text>
-          <text x="300" y="423" fontSize="8" fill="#94a3b8">32 layers (frozen)</text>
+          {/* Config row */}
+          <g>
+            <rect x="120" y="194" width="100" height="22" rx="5" fill="white" stroke="#e2e8f0" strokeWidth="1"/>
+            <text x="170" y="210" textAnchor="middle" fontSize="9" fontWeight="600" fill="#475569">Batch: 8</text>
+            <rect x="232" y="194" width="100" height="22" rx="5" fill="white" stroke="#e2e8f0" strokeWidth="1"/>
+            <text x="282" y="210" textAnchor="middle" fontSize="9" fontWeight="600" fill="#475569">LR: 1e-4</text>
+            <rect x="344" y="194" width="100" height="22" rx="5" fill="white" stroke="#e2e8f0" strokeWidth="1"/>
+            <text x="394" y="210" textAnchor="middle" fontSize="9" fontWeight="600" fill="#475569">Epochs: 10</text>
+            <rect x="456" y="194" width="100" height="22" rx="5" fill="white" stroke="#e2e8f0" strokeWidth="1"/>
+            <text x="506" y="210" textAnchor="middle" fontSize="9" fontWeight="600" fill="#475569">AdamW</text>
+            <rect x="568" y="194" width="100" height="22" rx="5" fill="white" stroke="#e2e8f0" strokeWidth="1"/>
+            <text x="618" y="210" textAnchor="middle" fontSize="9" fontWeight="600" fill="#475569">bfloat16</text>
+            <rect x="680" y="194" width="100" height="22" rx="5" fill="white" stroke="#e2e8f0" strokeWidth="1"/>
+            <text x="730" y="210" textAnchor="middle" fontSize="9" fontWeight="600" fill="#475569">H100 GPU</text>
+          </g>
 
-          {/* Right half: LoRA Adapters */}
-          <rect x="450" y="312" width="400" height="188" rx="8" fill="url(#gradLora)" stroke="#f9a8d4" strokeWidth="1"/>
-          <text x="650" y="332" textAnchor="middle" fontSize="11" fontWeight="700" fill="#be185d">LoRA ADAPTERS (Trainable Parameters)</text>
+          {/* Under-sampling and threshold box */}
+          <rect x="120" y="225" width="660" height="18" rx="5" fill="#f1f5f9" stroke="#e2e8f0" strokeWidth="1"/>
+          <text x="450" y="238" textAnchor="middle" fontSize="9" fill="#64748b">Per-epoch undersampling (5%) · Feature dropout · Auto-continue checkpoint · Gradient checkpointing (Unsloth)</text>
 
-          {/* LoRA hyperparams line */}
-          <text x="650" y="352" textAnchor="middle" fontSize="9" fill="#64748b">rank r = 8 | &#x3b1; = 8 | dropout = 0.05 | lr = 1e-4</text>
-
-          {/* Target modules grid */}
-          <rect x="465" y="362" width="370" height="64" rx="6" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
-          <text x="650" y="380" textAnchor="middle" fontSize="9" fontWeight="600" fill="#be185d">Target Modules (Linear Layers)</text>
-          {["q_proj", "v_proj", "gate_proj", "up_proj", "down_proj", "lm_head"].map((mod, i) => (
-            <rect key={i} x={475 + (i%3)*120} y={388 + Math.floor(i/3)*16} width="110" height="13" rx="3" fill="#fdf2f8" stroke="#fbcfe8" strokeWidth="1"/>
-          ))}
-          <text x={475 + 55} y="399" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">q_proj</text>
-          <text x={595 + 55} y="399" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">v_proj</text>
-          <text x={715 + 55} y="399" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">gate_proj</text>
-          <text x={475 + 55} y="415" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">up_proj</text>
-          <text x={595 + 55} y="415" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">down_proj</text>
-          <text x={715 + 55} y="415" fontSize="7" fontWeight="600" fill="#be185d" textAnchor="middle">lm_head</text>
-
-          {/* LoRA params row */}
-          <rect x="465" y="434" width="370" height="56" rx="6" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
-          <text x="650" y="452" textAnchor="middle" fontSize="9" fontWeight="600" fill="#be185d">Training Configuration</text>
-          <text x="650" y="468" textAnchor="middle" fontSize="8" fill="#64748b">10 epochs | Batch 8 | AdamW | Mixed bfloat16 | H100 GPU | ~4h per fold</text>
-          <text x="650" y="482" textAnchor="middle" fontSize="7" fill="#94a3b8">Auto-continue training from best checkpoint | Gradient checkpointing (Unsloth)</text>
-
-          {/* Arrow FinO+LoRA &#8594; Head */}
-          <line x1="450" y1="510" x2="470" y2="525" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
-
-          {/* ====== SECTION 4: CLASSIFICATION HEAD (center-bottom) ====== */}
-          <rect x="240" y="515" width="460" height="130" rx="12" fill="url(#gradHead)" stroke="#6ee7b7" strokeWidth="1.5" filter="url(#shadow2)"/>
-          <text x="470" y="540" textAnchor="middle" fontSize="12" fontWeight="700" fill="#059669">CLASSIFICATION HEAD</text>
-
-          {/* Softmax */}
-          <rect x="260" y="555" width="200" height="80" rx="8" fill="white" stroke="#a7f3d0" strokeWidth="1"/>
-          <text x="360" y="575" textAnchor="middle" fontSize="10" fontWeight="600" fill="#059669">Softmax Classification</text>
-          <text x="360" y="595" textAnchor="middle" fontSize="9" fill="#64748b">Last token only (YES / NO)</text>
-          <text x="360" y="612" textAnchor="middle" fontSize="9" fill="#64748b">Cross-entropy loss on last logit</text>
-          <text x="360" y="627" textAnchor="middle" fontSize="8" fill="#94a3b8">All other tokens masked</text>
-
-          {/* Mechanisms panel */}
-          <rect x="480" y="555" width="200" height="80" rx="8" fill="white" stroke="#a7f3d0" strokeWidth="1"/>
-          <text x="580" y="575" textAnchor="middle" fontSize="10" fontWeight="600" fill="#059669">Training Mechanisms</text>
-          <text x="580" y="595" textAnchor="middle" fontSize="9" fill="#64748b">Per-epoch undersampling (5%)</text>
-          <text x="580" y="612" textAnchor="middle" fontSize="9" fill="#64748b">Feature dropout (random)</text>
-          <text x="580" y="627" textAnchor="middle" fontSize="8" fill="#94a3b8">Gradient checkpointing</text>
-
-          {/* Arrow &#8594; Output */}
-          <line x1="470" y1="645" x2="470" y2="680" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
-
-          {/* ====== SECTION 5: OUTPUT (bottom) ====== */}
-          <rect x="240" y="685" width="460" height="100" rx="12" fill="url(#gradOutput)" stroke="#fcd34d" strokeWidth="1.5" filter="url(#shadow2)"/>
-          <text x="470" y="710" textAnchor="middle" fontSize="12" fontWeight="700" fill="#b45309">OUTPUT &amp; EVALUATION</text>
-
-          {/* Binary output */}
-          <rect x="260" y="723" width="180" height="48" rx="8" fill="white" stroke="#fde68a" strokeWidth="1"/>
-          <text x="350" y="745" textAnchor="middle" fontSize="12" fontWeight="700" fill="#dc2626">YES (Fraud)</text>
-          <text x="350" y="760" textAnchor="middle" fontSize="9" fill="#64748b">or</text>
-
-          {/* Metrics */}
-          <rect x="500" y="723" width="180" height="48" rx="8" fill="white" stroke="#fde68a" strokeWidth="1"/>
-          <text x="590" y="743" textAnchor="middle" fontSize="12" fontWeight="700" fill="#16a34a">NO (Clean)</text>
-
-          {/* Threshold optimization hint */}
-          <rect x="50" y="723" width="180" height="48" rx="8" fill="#fffbeb" stroke="#fde68a" strokeWidth="1"/>
-          <text x="140" y="745" textAnchor="middle" fontSize="10" fontWeight="600" fill="#b45309">F1-max threshold</text>
-          <text x="140" y="760" textAnchor="middle" fontSize="9" fill="#64748b">AUC optimization</text>
-
-          {/* ====== RIGHT PANEL: Evaluation split (sidebar) ====== */}
-          <rect x="890" y="40" width="240" height="250" rx="12" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5" filter="url(#shadow1)"/>
-          <text x="1010" y="65" textAnchor="middle" fontSize="12" fontWeight="700" fill="#334155">EVALUATION SPLIT</text>
+          {/* ====== BOTTOM ROW: Evaluation ====== */}
+          <rect x="100" y="280" width="700" height="105" rx="10" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5"/>
+          <text x="450" y="302" textAnchor="middle" fontSize="11" fontWeight="700" fill="#334155">Evaluation Strategy</text>
 
           {/* CI-FSFD */}
-          <rect x="905" y="80" width="210" height="90" rx="8" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5"/>
-          <text x="1010" y="100" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a">CI-FSFD (Recommended)</text>
-          <text x="1010" y="118" textAnchor="middle" fontSize="9" fill="#64748b">Company-isolated split</text>
-          <text x="1010" y="133" textAnchor="middle" fontSize="9" fill="#64748b">5-fold stratified</text>
-          <text x="1010" y="148" textAnchor="middle" fontSize="9" fill="#64748b">Preserves industry + time</text>
-          <text x="1010" y="163" textAnchor="middle" fontSize="8" fill="#94a3b8">~0.50–0.74 AUC range</text>
+          <rect x="120" y="315" width="320" height="55" rx="8" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5"/>
+          <text x="280" y="335" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a">CI-FSFD (Company-Isolated Split)</text>
+          <text x="280" y="352" textAnchor="middle" fontSize="9" fill="#64748b">5-fold stratified · preserves industry + time</text>
+          <text x="280" y="365" textAnchor="middle" fontSize="9" fill="#64748b">AUC range: 0.50 – 0.74</text>
 
-          {/* Random split */}
-          <rect x="905" y="185" width="210" height="90" rx="8" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1.5"/>
-          <text x="1010" y="205" textAnchor="middle" fontSize="10" fontWeight="700" fill="#dc2626">Random Split (Leaky)</text>
-          <text x="1010" y="223" textAnchor="middle" fontSize="9" fill="#64748b">Same company in both sets</text>
-          <text x="1010" y="238" textAnchor="middle" fontSize="9" fill="#64748b">Memorization artifact</text>
-          <text x="1010" y="253" textAnchor="middle" fontSize="9" fill="#64748b">~0.87–0.96 AUC (inflated)</text>
-          <text x="1010" y="268" textAnchor="middle" fontSize="8" fill="#94a3b8">DO NOT USE</text>
+          {/* Random Split */}
+          <rect x="460" y="315" width="320" height="55" rx="8" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1.5"/>
+          <text x="620" y="335" textAnchor="middle" fontSize="10" fontWeight="700" fill="#dc2626">Random Split (Leaky)</text>
+          <text x="620" y="352" textAnchor="middle" fontSize="9" fill="#64748b">Same company in both sets</text>
+          <text x="620" y="365" textAnchor="middle" fontSize="9" fill="#64748b">AUC range: 0.87 – 0.96 (inflated)</text>
 
-          {/* ====== BOTTOM INFO PANEL ====== */}
-          <rect x="890" y="310" width="240" height="180" rx="12" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5" filter="url(#shadow1)"/>
-          <text x="1010" y="335" textAnchor="middle" fontSize="12" fontWeight="700" fill="#334155">TRAINING CONFIG</text>
-
-          {[
-            { l: "Batch Size", v: "8" },
-            { l: "Learning Rate", v: "1e-4" },
-            { l: "Epochs", v: "10" },
-            { l: "Optimizer", v: "AdamW" },
-            { l: "Precision", v: "Mixed (bfloat16)" },
-            { l: "GPU", v: "NVIDIA H100" },
-            { l: "Time per fold", v: "~4 hours" },
-            { l: "LoRA rank r", v: "8" },
-          ].map((row, i) => (
-            <g key={i}>
-              <text x="910" y={360 + i*18} fontSize="9" fill="#64748b">{row.l}</text>
-              <text x="1110" y={360 + i*18} textAnchor="end" fontSize="9" fontWeight="600" fill="#334155">{row.v}</text>
-            </g>
-          ))}
-
-          {/* Legend */}
-          <rect x="30" y="840" width="1100" height="100" rx="10" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
-          <text x="580" y="862" textAnchor="middle" fontSize="11" fontWeight="700" fill="#475569">Legend</text>
-
-          {[
-            { c: "#bfdbfe", t: "Input Data (FIN + SMD&A)" },
-            { c: "#c7d2fe", t: "FinO-18B + LoRA (frozen backbone + trainable)" },
-            { c: "#a7f3d0", t: "Classification Head (softmax + training mechanics)" },
-            { c: "#fde68a", t: "Output & Evaluation (binary + metrics)" },
-          ].map((item, i) => (
-            <g key={i}>
-              <rect x={60 + i*268} y={880} width="258" height="16" rx="4" fill={item.c} stroke="#e2e8f0" strokeWidth="1"/>
-              <text x={189 + i*268} y="892" textAnchor="middle" fontSize="8" fontWeight="500" fill="#334155">{item.t}</text>
-            </g>
-          ))}
+          {/* ====== OTHER MODELS COMPARED ====== */}
+          <rect x="100" y="405" width="700" height="40" rx="10" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
+          <text x="450" y="423" textAnchor="middle" fontSize="10" fontWeight="600" fill="#475569">Other base models compared: Llama-3.1 8B · FinO-8B · FinO-14B</text>
+          <text x="450" y="438" textAnchor="middle" fontSize="9" fill="#94a3b8">All use the same LoRA (r=8, &alpha;=8) and softmax head setup</text>
         </svg>
       </div>
 
