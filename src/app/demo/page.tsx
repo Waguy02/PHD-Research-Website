@@ -454,16 +454,45 @@ function DatasetSlideshow() {
                   {slide.rawMDA}
                 </pre>
               </div>
-              <div className="mt-1 flex items-center justify-between text-[10px] text-gray-400">
-                <span>Scroll for full text &darr;</span>
-                <span className="font-medium text-blue-500">
-                  {slide.rawMDA.split(" ").length.toLocaleString()} words &rarr; {slide.smda.split(" ").length.toLocaleString()} words &middot; {(slide.rawMDA.split(" ").length / Math.max(slide.smda.split(" ").length, 1)).toFixed(1)}&times; compression
-                </span>
+              <div className="mt-1 text-right text-[10px] text-gray-400">
+                Scroll for full text &darr; · {slide.rawMDA.split(" ").length.toLocaleString()} words
               </div>
             </div>
 
             {/* Right: SMD&A + AAER */}
             <div className="flex min-w-0 flex-col gap-4">
+              {/* Compression arrow and stats */}
+              <div className="relative -mx-2 mb-2 flex items-center justify-center">
+                <svg className="h-12 w-full" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Curved arrow */}
+                  <path
+                    d="M 10 30 Q 100 -20 190 30"
+                    stroke="url(#arrowGradient)"
+                    strokeWidth="3"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  <defs>
+                    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#94a3b8" />
+                      <stop offset="50%" stopColor="#3b82f6" />
+                      <stop offset="100%" stopColor="#2563eb" />
+                    </linearGradient>
+                    <marker id="arrowhead" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto">
+                      <path d="M 0 0 L 12 5 L 0 10 Z" fill="#2563eb" />
+                    </marker>
+                  </defs>
+                </svg>
+                {/* Compression badge */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 shadow-lg">
+                    <span className="text-sm font-bold text-white">
+                      {(slide.rawMDA.split(" ").length / Math.max(slide.smda.split(" ").length, 1)).toFixed(1)}× compression
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <h3 className="mb-2 text-sm font-semibold text-blue-700">
                   SMD&A (Qwen3-32B Summary)
@@ -472,6 +501,9 @@ function DatasetSlideshow() {
                   <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700">
                     {slide.smda}
                   </pre>
+                </div>
+                <div className="mt-1 text-right text-[10px] text-gray-400">
+                  {slide.smda.split(" ").length.toLocaleString()} words · {((slide.rawMDA.split(" ").length - slide.smda.split(" ").length) / slide.rawMDA.split(" ").length * 100).toFixed(0)}% reduction
                 </div>
               </div>
 
