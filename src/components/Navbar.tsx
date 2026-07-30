@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -15,13 +15,28 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors ${
+        scrolled ? "border-gray-200 bg-white/95 shadow-sm" : "border-gray-100 bg-white/80"
+      } backdrop-blur-md`}
+    >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-gray-900"
+          className="text-lg font-semibold tracking-tight text-gray-900 transition-colors hover:text-blue-600"
         >
           <span className="gradient-text">G.S. Waffo Dzuyo</span>
         </Link>
@@ -37,13 +52,16 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`relative text-sm font-medium transition-colors ${
                   isActive
                     ? "text-blue-600"
                     : "text-gray-500 hover:text-gray-900"
                 }`}
               >
                 {link.label}
+                {isActive && (
+                  <span className="absolute -bottom-4 left-0 right-0 h-0.5 rounded-full bg-blue-600" />
+                )}
               </Link>
             );
           })}
@@ -54,9 +72,11 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="text-gray-500 md:hidden hover:text-gray-900"
           aria-label="Toggle navigation menu"
+          aria-expanded={mobileOpen}
         >
           <svg
-            className="h-6 w-6"
+            className="h-6 w-6 transition-transform duration-200"
+            style={{ transform: mobileOpen ? "rotate(90deg)" : "none" }}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -81,9 +101,13 @@ export default function Navbar() {
       </div>
 
       {/* Mobile links */}
-      {mobileOpen && (
-        <div className="border-t border-gray-200 bg-white md:hidden">
-          <div className="flex flex-col gap-2 px-6 py-4">
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="border-t border-gray-200 bg-white px-6 py-4 md:hidden">
+          <div className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -94,10 +118,10 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-sm font-medium transition-colors ${
+                  className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600"
-                      : "text-gray-500 hover:text-gray-900"
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
                   {link.label}
@@ -106,7 +130,7 @@ export default function Navbar() {
             })}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

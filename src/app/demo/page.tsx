@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
+  Legend,
 } from "recharts";
 import { benchmarkData, datasetStats, papers } from "@/lib/data";
 import { useState } from "react";
@@ -18,9 +19,13 @@ const COLORS = ["#2563eb", "#3b82f6", "#6366f1", "#8b5cf6", "#ef4444", "#9ca3af"
 
 export default function DemoPage() {
   const [sortBy, setSortBy] = useState<"aucScore" | "model">("aucScore");
+  const [selectedModel, setSelectedModel] = useState<string | null>(null);
+
   const sorted = [...benchmarkData].sort((a, b) =>
     sortBy === "aucScore" ? b.aucScore - a.aucScore : a.model.localeCompare(b.model)
   );
+
+  const selected = selectedModel ? benchmarkData.find((m) => m.model === selectedModel) : null;
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
@@ -78,10 +83,17 @@ export default function DemoPage() {
         </div>
         <div className="rounded-xl border border-gray-200 bg-white p-6">
           <ResponsiveContainer width="100%" height={360}>
-            <BarChart data={sorted} layout="vertical" margin={{ top: 4, right: 24, left: 120, bottom: 4 }}>
+            <BarChart data={sorted} layout="vertical" margin={{ top: 4, right: 24, left: 120, bottom: 4 }}
+              onClick={(e) => {
+                if (e.activePayload && e.activePayload[0]) {
+                  setSelectedModel(e.activePayload[0].payload.model);
+                }
+              }}
+            >
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis type="number" domain={[0, 1]} tick={{ fill: "#6b7280", fontSize: 12 }} tickFormatter={(v: number) => v.toFixed(2)} />
               <YAxis type="category" dataKey="model" tick={{ fill: "#6b7280", fontSize: 12 }} width={120} />
+              <Legend />
               <Tooltip
                 contentStyle={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: "8px", color: "#111827" }}
                 formatter={(value: any) => [Number(value).toFixed(2), "AUC"]}
@@ -89,21 +101,61 @@ export default function DemoPage() {
               />
               <Bar dataKey="aucScore" radius={[0, 4, 4, 0]} barSize={28}>
                 {sorted.map((entry, i) => (
-                  <Cell key={entry.model} fill={COLORS[i % COLORS.length]} fillOpacity={entry.model === "Zero-shot LLM" ? 0.4 : 0.85} />
+                  <Cell
+                    key={entry.model}
+                    fill={selectedModel === entry.model ? "#1e40af" : COLORS[i % COLORS.length]}
+                    fillOpacity={entry.model === "Zero-shot LLM" ? 0.4 : 0.85}
+                  />
                 ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+
+        {/* Selected model details */}
+        {selected && (
+          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-5">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-blue-900">{selected.model}</h3>
+              <button
+                onClick={() => setSelectedModel(null)}
+                className="text-xs text-blue-600 hover:text-blue-800"
+              >
+                Clear selection
+              </button>
+            </div>
+            <p className="mt-1 text-sm text-blue-700">{selected.description}</p>
+            <div className="mt-3 grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-500">AUC Score:</span>
+                <span className="ml-2 font-bold text-blue-700">{selected.aucScore.toFixed(2)}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Dataset:</span>
+                <span className="ml-2 font-medium text-blue-700">{selected.dataset}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Model cards */}
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {sorted.map((e) => (
-            <div key={e.model} className="rounded-lg border border-gray-200 bg-white px-3 py-2">
+            <button
+              key={e.model}
+              onClick={() => setSelectedModel(selectedModel === e.model ? null : e.model)}
+              className={`rounded-lg border px-4 py-3 text-left transition-all ${
+                selectedModel === e.model
+                  ? "border-blue-300 bg-blue-50 shadow-sm"
+                  : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
+              }`}
+            >
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-800">{e.model}</span>
                 <span className="text-sm font-bold text-blue-600">{e.aucScore.toFixed(2)}</span>
               </div>
-              <p className="text-xs text-gray-400">{e.description}</p>
-            </div>
+              <p className="mt-1 text-xs text-gray-400">{e.description}</p>
+            </button>
           ))}
         </div>
       </section>

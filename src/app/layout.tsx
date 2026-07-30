@@ -9,15 +9,56 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const domain = "https://waguy02.github.io/PHD-Research-Website";
+
 export const metadata: Metadata = {
-  title: "Guy Stephane Waffo Dzuyo — PhD Research",
+  title: {
+    default: "Guy Stephane Waffo Dzuyo — PhD Research",
+    template: "%s — Guy Stephane Waffo Dzuyo",
+  },
   description:
     "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial NLP, and Financial Fraud Detection using LLMs.",
+  authors: [{ name: "Guy Stephane Waffo Dzuyo" }],
+  creator: "Guy Stephane Waffo Dzuyo",
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: domain,
+    siteName: "Guy Stephane Waffo Dzuyo — PhD Research",
     title: "Guy Stephane Waffo Dzuyo — PhD Research",
     description:
       "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial NLP, and Financial Fraud Detection using LLMs.",
-    type: "website",
+    images: [
+      {
+        url: `${domain}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Guy Stephane Waffo Dzuyo — PhD Research",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@waguy02",
+    title: "Guy Stephane Waffo Dzuyo — PhD Research",
+    description:
+      "PhD candidate at LORIA / Forvis Mazars. Research in NLP for Auditing, Financial NLP, and Financial Fraud Detection using LLMs.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  verification: {
+    other: {
+      "google-site-verification": "",
+    },
   },
 };
 
