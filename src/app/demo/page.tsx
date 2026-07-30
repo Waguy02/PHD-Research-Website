@@ -561,27 +561,30 @@ function DatasetSlideshow() {
             </div>
           </div>
 
-          {/* Content grid: Raw MDA (left) + SMD&A (right) — MDA is full height */}
+          {/* Content grid: Raw MDA (left) + SMD&A (right) */}
           <div className="grid gap-6 lg:grid-cols-2">
-            {/* Left: Raw MD&A — FULL text, no max-height truncation */}
+            {/* Left: Raw MD&A — scrollable but full content */}
             <div className="flex min-w-0 flex-col">
               <h3 className="mb-2 text-sm font-semibold text-gray-700">
                 Raw MD&A (Original 10-Q Filing)
               </h3>
-              <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <div className="max-h-[600px] overflow-y-auto rounded-lg border border-gray-200 bg-white p-4">
                 <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700">
                   {slide.rawMDA}
                 </pre>
               </div>
+              <div className="mt-1 text-right text-[10px] text-gray-400">
+                Scroll for full text &darr; · {slide.rawMDA.split(" ").length} words
+              </div>
             </div>
 
-            {/* Right: SMD&A + AAER — also no truncation on SMD&A */}
+            {/* Right: SMD&A + AAER */}
             <div className="flex min-w-0 flex-col gap-4">
               <div>
                 <h3 className="mb-2 text-sm font-semibold text-blue-700">
                   SMD&A (Qwen3-32B Summary)
                 </h3>
-                <div className="rounded-lg border border-blue-200 bg-white p-4">
+                <div className="max-h-[360px] overflow-y-auto rounded-lg border border-blue-200 bg-white p-4">
                   <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700">
                     {slide.smda}
                   </pre>
