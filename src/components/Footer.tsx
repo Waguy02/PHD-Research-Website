@@ -21,7 +21,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID"
+              href="https://scholar.google.com/citations?hl=fr&user=j21NBlEAAAAJ"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 transition-colors hover:text-gray-700"

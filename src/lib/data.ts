@@ -223,10 +223,10 @@ export const benchmarkData: BenchmarkResult[] = [
 ];
 
 export const datasetStats: DatasetStat[] = [
-  { label: "Companies", value: 4510, unit: "unique" },
-  { label: "Fraud Labels (AAER)", value: 1170, unit: "firm-years" },
-  { label: "Financial Features", value: 122, unit: "per company" },
-  { label: "Time Span", value: 20, unit: "years" },
-  { label: "Industry Sectors", value: 11, unit: "sectors" },
-  { label: "MD&A Summaries", value: 4510, unit: "documents" },
+  { label: "Companies", value: 13332, unit: "unique" },
+  { label: "Firm-Quarters", value: 268936, unit: "reports" },
+  { label: "Fraud Labels (AAER)", value: 1451, unit: "firm-quarters" },
+  { label: "Financial Features", value: 122, unit: "indicators" },
+  { label: "Time Span", value: 15, unit: "years (2009-2024)" },
+  { label: "Final Samples", value: 10159, unit: "instances" },
 ];
