@@ -458,136 +458,7 @@ function TabContent({ activeTab }: { activeTab: Tab }) {
   }
 
   if (activeTab === "architecture") {
-    return (
-      <section className="space-y-8">
-        {/* Architecture overview */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold">LoRA Fine-tuning Architecture</h2>
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div>
-              <h3 className="mb-3 text-lg font-medium text-gray-900">LoRA Configuration</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-sm text-gray-500">Rank (r)</span>
-                  <span className="text-sm font-semibold text-gray-900">{loraConfig.r}</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-sm text-gray-500">Alpha</span>
-                  <span className="text-sm font-semibold text-gray-900">{loraConfig.alpha}</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-sm text-gray-500">Dropout</span>
-                  <span className="text-sm font-semibold text-gray-900">{loraConfig.dropout}</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-sm text-gray-500">Learning Rate</span>
-                  <span className="text-sm font-semibold text-gray-900">{loraConfig.learningRate}</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-sm text-gray-500">Batch Size</span>
-                  <span className="text-sm font-semibold text-gray-900">{loraConfig.batchSize}</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-sm text-gray-500">Epochs</span>
-                  <span className="text-sm font-semibold text-gray-900">{loraConfig.epochs}</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 className="mb-3 text-lg font-medium text-gray-900">Target Modules</h3>
-              <div className="flex flex-wrap gap-2">
-                {loraConfig.targetModules.map((mod: string) => (
-                  <span
-                    key={mod}
-                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-700"
-                  >
-                    {mod}
-                  </span>
-                ))}
-              </div>
-              <h3 className="mt-4 mb-3 text-lg font-medium text-gray-900">Base Models Used</h3>
-              <div className="space-y-2">
-                {loraConfig.baseModels.map((model: string) => (
-                  <div
-                    key={model}
-                    className="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2"
-                  >
-                    <span className="text-sm text-gray-700">{model}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Training mechanism */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold">Training Mechanisms</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              {
-                title: "Softmax Classification",
-                desc: "Modified LM head for 2 classes (Fraud/Not Fraud). Loss computed only on last token (YES/NO classification). All previous tokens ignored.",
-              },
-              {
-                title: "Per-epoch Undersampling",
-                desc: "Dynamic PermutableUndersamplingDataset balances classes each epoch while preserving SIC industry + year distributions.",
-              },
-              {
-                title: "Threshold Optimization",
-                desc: "Per-epoch AUC-based threshold optimization on validation set. Best threshold applied for metrics computation.",
-              },
-              {
-                title: "Feature Dropout",
-                desc: "Randomly drop financial features during training for robustness. Prevents over-reliance on specific features.",
-              },
-              {
-                title: "Auto-Continue Training",
-                desc: "Can resume training from best checkpoint (by F1 score). Ensures optimal model selection across epochs.",
-              },
-              {
-                title: "Gradient Checkpointing",
-                desc: "Unsloth mode for memory-efficient training. Enables larger batch sizes on limited GPU memory.",
-              },
-            ].map((mechanism, idx) => (
-              <div
-                key={idx}
-                className="rounded-lg border border-gray-200 bg-gray-50 p-4"
-              >
-                <h3 className="mb-2 text-sm font-semibold text-gray-900">{mechanism.title}</h3>
-                <p className="text-xs leading-relaxed text-gray-500">{mechanism.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Data flow diagram */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-xl font-semibold">Data Flow</h2>
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-4 text-center">
-              <span className="text-sm font-medium text-gray-700">Raw SEC Filings (10-K/10-Q) + AAER Enforcement Releases</span>
-            </div>
-            <div className="text-2xl text-gray-300">↓</div>
-            <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-4 text-center">
-              <span className="text-sm font-medium text-gray-700">Preprocessing: MDA Extraction + XBRL Parsing + Fraud Labeling</span>
-            </div>
-            <div className="text-2xl text-gray-300">↓</div>
-            <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-4 text-center">
-              <span className="text-sm font-medium text-gray-700">Feature Engineering: 122 Features + SMD&A Summaries + Beneish M-score</span>
-            </div>
-            <div className="text-2xl text-gray-300">↓</div>
-            <div className="w-full rounded-lg border border-blue-200 bg-blue-50 p-4 text-center">
-              <span className="text-sm font-semibold text-blue-700">LLM Prompt: Financial Features + MDA Summary → "YES"/"NO"</span>
-            </div>
-            <div className="text-2xl text-gray-300">↓</div>
-            <div className="w-full rounded-lg border border-green-200 bg-green-50 p-4 text-center">
-              <span className="text-sm font-semibold text-green-700">LoRA Fine-tuning → Softmax Classifier → AUC Score</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    return <ArchitectureSection />;
   }
 
   if (activeTab === "results") {
@@ -787,6 +658,326 @@ function DatasetSlideshow() {
         Browse all 10 samples. Raw MDA text is shown in full (no truncation).
         SMD&A preserves the 11-section structure (strategic priorities, operations, financials, risks, etc.).
         Average raw MDA: ~14k tokens; Average SMD&A: ~3,800 tokens.
+      </div>
+    </section>
+  );
+}
+
+// ─── Architecture Section with SVG Diagram ─────────────────────────
+function ArchitectureSection() {
+  return (
+    <section className="space-y-8">
+      {/* Large SVG architecture schematic */}
+      <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-8">
+        <h2 className="mb-6 text-center text-xl font-semibold">LoRA Fine-tuning Architecture — Schematic Overview</h2>
+        <svg viewBox="0 0 1160 960" className="w-full max-w-5xl mx-auto" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+          <defs>
+            <filter id="shadow1" x="-4%" y="-4%" width="108%" height="112%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.1"/>
+            </filter>
+            <filter id="shadow2" x="-4%" y="-4%" width="108%" height="112%">
+              <feDropShadow dx="0" dy="3" stdDeviation="4" floodOpacity="0.15"/>
+            </filter>
+            <marker id="arrowDown" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+              <path d="M0,0 L10,4 L0,8" fill="#64748b"/>
+            </marker>
+            <marker id="arrowDownBlue" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+              <path d="M0,0 L10,4 L0,8" fill="#2563eb"/>
+            </marker>
+            <marker id="arrowRight" markerWidth="10" markerHeight="8" refX="3" refY="4" orient="auto">
+              <path d="M0,0 L10,4 L0,8" fill="#64748b"/>
+            </marker>
+            <linearGradient id="gradInput" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#dbeafe"/>
+              <stop offset="100%" stopColor="#bfdbfe"/>
+            </linearGradient>
+            <linearGradient id="gradLLM" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#e0e7ff"/>
+              <stop offset="100%" stopColor="#c7d2fe"/>
+            </linearGradient>
+            <linearGradient id="gradLora" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#fce7f3"/>
+              <stop offset="100%" stopColor="#fbcfe8"/>
+            </linearGradient>
+            <linearGradient id="gradHead" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#d1fae5"/>
+              <stop offset="100%" stopColor="#a7f3d0"/>
+            </linearGradient>
+            <linearGradient id="gradOutput" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#fef3c7"/>
+              <stop offset="100%" stopColor="#fde68a"/>
+            </linearGradient>
+          </defs>
+
+          {/* Background */}
+          <rect x="0" y="0" width="1160" height="960" rx="16" fill="white"/>
+
+          {/* ====== SECTION 1: INPUT (top-left) ====== */}
+          <rect x="30" y="40" width="340" height="190" rx="12" fill="url(#gradInput)" stroke="#93c5fd" strokeWidth="1.5" filter="url(#shadow1)"/>
+          <text x="200" y="65" textAnchor="middle" fontSize="12" fontWeight="700" fill="#1d4ed8">INPUT PREPARATION</text>
+
+          {/* Financial features */}
+          <rect x="50" y="80" width="300" height="44" rx="6" fill="white" stroke="#bfdbfe" strokeWidth="1"/>
+          <text x="60" y="100" fontSize="10" fontWeight="600" fill="#475569">Financial Indicators (FIN)</text>
+          <text x="60" y="115" fontSize="9" fill="#94a3b8">122 engineered features: ratios, M-score, accruals, R&amp;D intensity</text>
+
+          {/* Text features */}
+          <rect x="50" y="132" width="300" height="44" rx="6" fill="white" stroke="#bfdbfe" strokeWidth="1"/>
+          <text x="60" y="152" fontSize="10" fontWeight="600" fill="#475569">Summarized MD&amp;A (SMD&amp;A)</text>
+          <text x="60" y="167" fontSize="9" fill="#94a3b8">Qwen3-32B summary (avg ~3,800 tokens, 11 sections)</text>
+
+          {/* Serialized prompt */}
+          <rect x="50" y="184" width="300" height="38" rx="6" fill="#eff6ff" stroke="#93c5fd" strokeWidth="1" strokeDasharray="4,3"/>
+          <text x="60" y="202" fontSize="10" fontWeight="600" fill="#1d4ed8">Serialized Prompt</text>
+          <text x="60" y="215" fontSize="9" fill="#64748b">{"\"Industry: {s} | Financials: {122 features} | {SMDA}\""}</text>
+
+          {/* Arrow input&#8594;LLM */}
+          <line x1="200" y1="230" x2="200" y2="265" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
+
+          {/* ====== SECTION 2: BASE LLM (center) ====== */}
+          <rect x="30" y="270" width="480" height="220" rx="12" fill="url(#gradLLM)" stroke="#a5b4fc" strokeWidth="1.5" filter="url(#shadow2)"/>
+          <text x="270" y="295" textAnchor="middle" fontSize="12" fontWeight="700" fill="#4338ca">BASE LLM — Pretrained Backbone</text>
+
+          {/* Model selector */}
+          <rect x="50" y="310" width="140" height="70" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
+          <text x="120" y="330" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">Base Models</text>
+          <text x="120" y="347" textAnchor="middle" fontSize="9" fill="#64748b">Fino1-8B</text>
+          <text x="120" y="360" textAnchor="middle" fontSize="9" fill="#64748b">Llama-3.1 8B</text>
+          <text x="120" y="373" textAnchor="middle" fontSize="9" fill="#64748b">Qwen3-32B</text>
+
+          {/* 4-bit */}
+          <rect x="210" y="310" width="120" height="70" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
+          <text x="270" y="330" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">Quantization</text>
+          <text x="270" y="350" textAnchor="middle" fontSize="11" fontWeight="700" fill="#059669">4-bit NF4</text>
+          <text x="270" y="368" textAnchor="middle" fontSize="9" fill="#64748b">GPTQ quantization</text>
+
+          {/* Hidden layers */}
+          <rect x="50" y="390" width="440" height="90" rx="8" fill="white" stroke="#c7d2fe" strokeWidth="1"/>
+          <text x="270" y="410" textAnchor="middle" fontSize="10" fontWeight="600" fill="#4338ca">Transformer Layers (Hidden)</text>
+
+          {/* Layer blocks */}
+          {[0,1,2,3].map((i) => (
+            <rect key={i} x={65 + i*106} y={420} width="96" height="24" rx="4" fill="#eef2ff" stroke="#c7d2fe" strokeWidth="1"/>
+          ))}
+          <text x="270" y="434" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6366f1">self-attn</text>
+          {[0,1,2,3].map((i) => (
+            <text key={i} x={65 + i*106 + 48} y="450" textAnchor="middle" fontSize="8" fill="#94a3b8">Layer {i+1}</text>
+          ))}
+          <text x="462" y="440" fontSize="10" fill="#94a3b8">...</text>
+
+          {/* ====== SECTION 3: LORA ADAPTERS (right, beside LLM) ====== */}
+          <rect x="530" y="270" width="340" height="220" rx="12" fill="url(#gradLora)" stroke="#f9a8d4" strokeWidth="1.5" filter="url(#shadow2)"/>
+          <text x="700" y="295" textAnchor="middle" fontSize="12" fontWeight="700" fill="#be185d">LoRA ADAPTERS (Trainable)</text>
+
+          {/* LoRA params */}
+          <rect x="550" y="310" width="300" height="50" rx="8" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
+          <text x="560" y="328" fontSize="10" fontWeight="600" fill="#be185d">LoRA Hyperparameters</text>
+          <text x="560" y="345" fontSize="9" fill="#64748b">r = 8 | &#x3b1; = 8 | dropout = 0.05 | lr = 1e-4</text>
+
+          {/* Target modules */}
+          <rect x="550" y="370" width="300" height="110" rx="8" fill="white" stroke="#fbcfe8" strokeWidth="1"/>
+          <text x="700" y="390" textAnchor="middle" fontSize="10" fontWeight="600" fill="#be185d">Target Modules (Linear Layers)</text>
+
+          {["q_proj", "v_proj", "gate_proj", "up_proj", "down_proj", "lm_head"].map((mod, i) => (
+            <rect key={i} x={560 + (i%2)*140} y={400 + Math.floor(i/2)*24} width="130" height="20" rx="4" fill="#fdf2f8" stroke="#fbcfe8" strokeWidth="1"/>
+          ))}
+          <text x="562" y="414" fontSize="8" fontWeight="600" fill="#be185d">q_proj</text>
+          <text x="702" y="414" fontSize="8" fontWeight="600" fill="#be185d">v_proj</text>
+          <text x="562" y="438" fontSize="8" fontWeight="600" fill="#be185d">gate_proj</text>
+          <text x="702" y="438" fontSize="8" fontWeight="600" fill="#be185d">up_proj</text>
+          <text x="562" y="462" fontSize="8" fontWeight="600" fill="#be185d">down_proj</text>
+          <text x="702" y="462" fontSize="8" fontWeight="600" fill="#be185d">lm_head</text>
+
+          {/* Arrow LLM &#8594; LoRA */}
+          <line x1="510" y1="380" x2="530" y2="380" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowRight)"/>
+
+          {/* Arrow LLM+LoRA &#8594; Head */}
+          <line x1="510" y1="480" x2="510" y2="510" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
+          <line x1="510" y1="480" x2="700" y2="510" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
+
+          {/* ====== SECTION 4: CLASSIFICATION HEAD (center-bottom) ====== */}
+          <rect x="240" y="515" width="460" height="130" rx="12" fill="url(#gradHead)" stroke="#6ee7b7" strokeWidth="1.5" filter="url(#shadow2)"/>
+          <text x="470" y="540" textAnchor="middle" fontSize="12" fontWeight="700" fill="#059669">CLASSIFICATION HEAD</text>
+
+          {/* Softmax */}
+          <rect x="260" y="555" width="200" height="80" rx="8" fill="white" stroke="#a7f3d0" strokeWidth="1"/>
+          <text x="360" y="575" textAnchor="middle" fontSize="10" fontWeight="600" fill="#059669">Softmax Classification</text>
+          <text x="360" y="595" textAnchor="middle" fontSize="9" fill="#64748b">Last token only (YES / NO)</text>
+          <text x="360" y="612" textAnchor="middle" fontSize="9" fill="#64748b">Cross-entropy loss on last logit</text>
+          <text x="360" y="627" textAnchor="middle" fontSize="8" fill="#94a3b8">All other tokens masked</text>
+
+          {/* Mechanisms panel */}
+          <rect x="480" y="555" width="200" height="80" rx="8" fill="white" stroke="#a7f3d0" strokeWidth="1"/>
+          <text x="580" y="575" textAnchor="middle" fontSize="10" fontWeight="600" fill="#059669">Training Mechanisms</text>
+          <text x="580" y="595" textAnchor="middle" fontSize="9" fill="#64748b">Per-epoch undersampling (5%)</text>
+          <text x="580" y="612" textAnchor="middle" fontSize="9" fill="#64748b">Feature dropout (random)</text>
+          <text x="580" y="627" textAnchor="middle" fontSize="8" fill="#94a3b8">Gradient checkpointing</text>
+
+          {/* Arrow &#8594; Output */}
+          <line x1="470" y1="645" x2="470" y2="680" stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrowDown)"/>
+
+          {/* ====== SECTION 5: OUTPUT (bottom) ====== */}
+          <rect x="240" y="685" width="460" height="100" rx="12" fill="url(#gradOutput)" stroke="#fcd34d" strokeWidth="1.5" filter="url(#shadow2)"/>
+          <text x="470" y="710" textAnchor="middle" fontSize="12" fontWeight="700" fill="#b45309">OUTPUT &amp; EVALUATION</text>
+
+          {/* Binary output */}
+          <rect x="260" y="723" width="180" height="48" rx="8" fill="white" stroke="#fde68a" strokeWidth="1"/>
+          <text x="350" y="745" textAnchor="middle" fontSize="12" fontWeight="700" fill="#dc2626">YES (Fraud)</text>
+          <text x="350" y="760" textAnchor="middle" fontSize="9" fill="#64748b">or</text>
+
+          {/* Metrics */}
+          <rect x="500" y="723" width="180" height="48" rx="8" fill="white" stroke="#fde68a" strokeWidth="1"/>
+          <text x="590" y="743" textAnchor="middle" fontSize="12" fontWeight="700" fill="#16a34a">NO (Clean)</text>
+
+          {/* Threshold optimization hint */}
+          <rect x="50" y="723" width="180" height="48" rx="8" fill="#fffbeb" stroke="#fde68a" strokeWidth="1"/>
+          <text x="140" y="745" textAnchor="middle" fontSize="10" fontWeight="600" fill="#b45309">F1-max threshold</text>
+          <text x="140" y="760" textAnchor="middle" fontSize="9" fill="#64748b">AUC optimization</text>
+
+          {/* ====== RIGHT PANEL: Evaluation split (sidebar) ====== */}
+          <rect x="890" y="40" width="240" height="250" rx="12" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5" filter="url(#shadow1)"/>
+          <text x="1010" y="65" textAnchor="middle" fontSize="12" fontWeight="700" fill="#334155">EVALUATION SPLIT</text>
+
+          {/* CI-FSFD */}
+          <rect x="905" y="80" width="210" height="90" rx="8" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5"/>
+          <text x="1010" y="100" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a">CI-FSFD (Recommended)</text>
+          <text x="1010" y="118" textAnchor="middle" fontSize="9" fill="#64748b">Company-isolated split</text>
+          <text x="1010" y="133" textAnchor="middle" fontSize="9" fill="#64748b">5-fold stratified</text>
+          <text x="1010" y="148" textAnchor="middle" fontSize="9" fill="#64748b">Preserves industry + time</text>
+          <text x="1010" y="163" textAnchor="middle" fontSize="8" fill="#94a3b8">~0.50–0.74 AUC range</text>
+
+          {/* Random split */}
+          <rect x="905" y="185" width="210" height="90" rx="8" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1.5"/>
+          <text x="1010" y="205" textAnchor="middle" fontSize="10" fontWeight="700" fill="#dc2626">Random Split (Leaky)</text>
+          <text x="1010" y="223" textAnchor="middle" fontSize="9" fill="#64748b">Same company in both sets</text>
+          <text x="1010" y="238" textAnchor="middle" fontSize="9" fill="#64748b">Memorization artifact</text>
+          <text x="1010" y="253" textAnchor="middle" fontSize="9" fill="#64748b">~0.87–0.96 AUC (inflated)</text>
+          <text x="1010" y="268" textAnchor="middle" fontSize="8" fill="#94a3b8">DO NOT USE</text>
+
+          {/* ====== BOTTOM INFO PANEL ====== */}
+          <rect x="890" y="310" width="240" height="180" rx="12" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5" filter="url(#shadow1)"/>
+          <text x="1010" y="335" textAnchor="middle" fontSize="12" fontWeight="700" fill="#334155">TRAINING CONFIG</text>
+
+          {[
+            { l: "Batch Size", v: "8" },
+            { l: "Learning Rate", v: "1e-4" },
+            { l: "Epochs", v: "10" },
+            { l: "Optimizer", v: "AdamW" },
+            { l: "Precision", v: "Mixed (bfloat16)" },
+            { l: "GPU", v: "NVIDIA H100" },
+            { l: "Time per fold", v: "~4 hours" },
+            { l: "LoRA rank r", v: "8" },
+          ].map((row, i) => (
+            <g key={i}>
+              <text x="910" y={360 + i*18} fontSize="9" fill="#64748b">{row.l}</text>
+              <text x="1110" y={360 + i*18} textAnchor="end" fontSize="9" fontWeight="600" fill="#334155">{row.v}</text>
+            </g>
+          ))}
+
+          {/* Legend */}
+          <rect x="30" y="840" width="1100" height="100" rx="10" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
+          <text x="580" y="862" textAnchor="middle" fontSize="11" fontWeight="700" fill="#475569">Legend</text>
+
+          {[
+            { c: "#bfdbfe", t: "Input Data (FIN + SMD&A)" },
+            { c: "#c7d2fe", t: "Base LLM Backbone (frozen)" },
+            { c: "#fbcfe8", t: "LoRA Adapters (trainable parameters)" },
+            { c: "#a7f3d0", t: "Classification Head (softmax + training mechanics)" },
+            { c: "#fde68a", t: "Output & Evaluation (binary + metrics)" },
+          ].map((item, i) => (
+            <g key={i}>
+              <rect x={60 + i*215} y={880} width="205" height="16" rx="4" fill={item.c} stroke="#e2e8f0" strokeWidth="1"/>
+              <text x={162 + i*215} y="892" textAnchor="middle" fontSize="8" fontWeight="500" fill="#334155">{item.t}</text>
+            </g>
+          ))}
+        </svg>
+      </div>
+
+      {/* Hyperparams card below */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="rounded-xl border border-gray-200 bg-white p-6">
+          <h3 className="mb-4 text-base font-semibold text-gray-900">LoRA Configuration</h3>
+          <div className="space-y-2.5">
+            {[
+              { label: "Rank (r)", value: loraConfig.r },
+              { label: "Alpha", value: loraConfig.alpha },
+              { label: "Dropout", value: loraConfig.dropout },
+              { label: "Learning Rate", value: loraConfig.learningRate },
+              { label: "Batch Size", value: loraConfig.batchSize },
+              { label: "Epochs", value: loraConfig.epochs },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center justify-between border-b border-gray-100 pb-2">
+                <span className="text-sm text-gray-500">{item.label}</span>
+                <span className="text-sm font-semibold text-gray-900">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-gray-200 bg-white p-6">
+          <h3 className="mb-4 text-base font-semibold text-gray-900">Base Models &amp; Target Modules</h3>
+          <div className="mb-3">
+            <span className="mb-2 block text-xs font-medium text-gray-500">Base Models</span>
+            <div className="flex flex-wrap gap-1.5">
+              {loraConfig.baseModels.map((m) => (
+                <span key={m} className="rounded-lg border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">{m}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <span className="mb-2 block text-xs font-medium text-gray-500">Target Modules</span>
+            <div className="flex flex-wrap gap-1.5">
+              {loraConfig.targetModules.map((m) => (
+                <span key={m} className="rounded-lg border border-pink-200 bg-pink-50 px-2.5 py-1 text-xs font-medium text-pink-700">{m}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Training mechanisms grid */}
+      <div className="rounded-xl border border-gray-200 bg-white p-6">
+        <h2 className="mb-5 text-lg font-semibold text-gray-900">Training Mechanisms</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { title: "Softmax Classification", desc: "Modified LM head for 2 classes (Fraud/Not Fraud). Loss computed only on last token (YES/NO). All previous tokens ignored during backprop.", icon: "\ud83c\udfaf" },
+            { title: "Per-epoch Undersampling", desc: "Dynamic PermutableUndersamplingDataset balances classes each epoch while preserving SIC industry + year distributions. Targets 5% fraud rate.", icon: "\u2696\ufe0f" },
+            { title: "Threshold Optimization", desc: "Per-epoch AUC-based threshold optimization on validation set. Best F1-maximizing threshold applied for final metrics computation.", icon: "\ud83d\udcd0" },
+            { title: "Feature Dropout", desc: "Randomly drops financial features during training to prevent over-reliance on specific indicators. Improves generalization across companies.", icon: "\ud83c\udf00" },
+            { title: "Auto-Continue Training", desc: "Resumes from best checkpoint (by F1 score). Ensures optimal model selection across all epochs without manual intervention.", icon: "\ud83d\udd04" },
+            { title: "Gradient Checkpointing", desc: "Unsloth mode for memory-efficient training. Reduces VRAM usage by recomputing activations during backward pass.", icon: "\ud83d\udcbe" },
+          ].map((m) => (
+            <div key={m.title} className="rounded-lg border border-gray-100 bg-gray-50 p-4 transition-all hover:border-gray-200 hover:shadow-sm">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="text-lg">{m.icon}</span>
+                <h3 className="text-sm font-semibold text-gray-900">{m.title}</h3>
+              </div>
+              <p className="text-xs leading-relaxed text-gray-500">{m.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Data flow under the diagram */}
+      <div className="rounded-xl border border-gray-200 bg-white p-6">
+        <h2 className="mb-4 text-lg font-semibold text-gray-900">Data Flow Summary</h2>
+        <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
+          {[
+            { label: "SEC Filings", color: "bg-blue-100 text-blue-700 border-blue-200" },
+            { label: "XBRL Parsing", color: "bg-blue-100 text-blue-700 border-blue-200" },
+            { label: "122 Features", color: "bg-indigo-100 text-indigo-700 border-indigo-200" },
+            { label: "SMD&A Summary", color: "bg-indigo-100 text-indigo-700 border-indigo-200" },
+            { label: "Prompt Assembly", color: "bg-purple-100 text-purple-700 border-purple-200" },
+            { label: "LoRA Fine-tune", color: "bg-pink-100 text-pink-700 border-pink-200" },
+            { label: "Softmax Classifier", color: "bg-green-100 text-green-700 border-green-200" },
+            { label: "AUC / F1 Eval", color: "bg-amber-100 text-amber-700 border-amber-200" },
+          ].map((step, i) => (
+            <span key={step.label} className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 font-medium ${step.color}`}>
+              {step.label}
+              {i < 7 && <span className="text-gray-400">&rarr;</span>}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );
