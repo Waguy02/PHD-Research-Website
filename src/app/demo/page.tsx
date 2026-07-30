@@ -454,8 +454,9 @@ function DatasetSlideshow() {
                   {slide.rawMDA}
                 </pre>
               </div>
-              <div className="mt-1 text-right text-[10px] text-gray-400">
-                Scroll for full text &darr; · {slide.rawMDA.split(" ").length.toLocaleString()} words
+              <div className="mt-2 flex items-center justify-between">
+                <span className="text-[11px] text-gray-400">Scroll for full text &darr;</span>
+                <span className="text-sm font-bold text-gray-700">{slide.rawMDA.split(" ").length.toLocaleString()} <span className="text-xs font-medium text-gray-500">words</span></span>
               </div>
             </div>
 
@@ -485,8 +486,8 @@ function DatasetSlideshow() {
                 </svg>
                 {/* Compression badge */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 shadow-lg">
-                    <span className="text-sm font-bold text-white">
+                  <div className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-2.5 shadow-lg">
+                    <span className="text-base font-bold text-white">
                       {(slide.rawMDA.split(" ").length / Math.max(slide.smda.split(" ").length, 1)).toFixed(1)}× compression
                     </span>
                   </div>
@@ -502,9 +503,10 @@ function DatasetSlideshow() {
                     {slide.smda}
                   </pre>
                 </div>
-                <div className="mt-1 text-right text-[10px] text-gray-400">
-                  {slide.smda.split(" ").length.toLocaleString()} words · {((slide.rawMDA.split(" ").length - slide.smda.split(" ").length) / slide.rawMDA.split(" ").length * 100).toFixed(0)}% reduction
-                </div>
+                <div className="mt-2 text-right">
+                <span className="text-sm font-bold text-blue-600">{slide.smda.split(" ").length.toLocaleString()} <span className="text-xs font-medium text-blue-500">words</span></span>
+                <span className="ml-2 text-xs font-semibold text-green-600">({((slide.rawMDA.split(" ").length - slide.smda.split(" ").length) / slide.rawMDA.split(" ").length * 100).toFixed(0)}% reduction)</span>
+              </div>
               </div>
 
               {/* AAER / Fraud details */}
