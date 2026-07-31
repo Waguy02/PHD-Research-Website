@@ -44,21 +44,6 @@ export default function Home() {
               fraud through multimodal LLM-based analysis.
             </p>
 
-            <div className="mb-6 grid grid-cols-3 gap-6 text-center sm:grid-cols-3">
-              <div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">3</div>
-                <div className="text-xs text-gray-400 dark:text-slate-500">Papers</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">2</div>
-                <div className="text-xs text-gray-400 dark:text-slate-500">Published</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">1</div>
-                <div className="text-xs text-gray-400 dark:text-slate-500">Under Review</div>
-              </div>
-            </div>
-
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:guy.stephane.waffo@forvismazars.com"
