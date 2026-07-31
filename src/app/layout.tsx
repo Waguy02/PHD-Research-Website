@@ -88,7 +88,7 @@ export default function RootLayout({
           `,
         }} />
       </head>
-      <body className="flex min-h-full flex-col bg-white text-gray-900 dark:bg-slate-950 dark:text-slate-100">
+      <body className="flex min-h-full flex-col">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1 pt-16">{children}</main>

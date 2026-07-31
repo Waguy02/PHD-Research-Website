@@ -24,8 +24,8 @@ export default function PublicationsPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="mb-2 text-4xl font-bold tracking-tight dark:text-slate-100">Publications</h1>
-      <p className="mb-8 text-gray-500 dark:text-slate-400">
+      <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100">Publications</h1>
+      <p className="mb-8 text-gray-600 dark:text-slate-400">
         Research papers in AI for auditing, financial NLP, and fraud detection.
       </p>
 
@@ -36,7 +36,7 @@ export default function PublicationsPage() {
           className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-colors ${
             activeTag === "all"
               ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-900/40 dark:text-blue-300"
-              : "border-gray-200 bg-white text-gray-500 hover:border-gray-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600"
+              : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600"
           }`}
         >
           All
@@ -48,7 +48,7 @@ export default function PublicationsPage() {
             className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-colors ${
               activeTag === tag
                 ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-900/40 dark:text-blue-300"
-                : "border-gray-200 bg-white text-gray-500 hover:border-gray-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600"
+                : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600"
             }`}
           >
             {tag}
@@ -58,7 +58,7 @@ export default function PublicationsPage() {
 
       <div className="space-y-6">
         {sorted.length === 0 ? (
-          <p className="text-gray-400 dark:text-slate-500">No papers match the selected tag.</p>
+          <p className="text-gray-500 dark:text-slate-500">No papers match the selected tag.</p>
         ) : (
           sorted.map((paper) => {
             const badge = statusStyles[paper.status];
@@ -75,11 +75,11 @@ export default function PublicationsPage() {
                   <span className={`rounded px-2.5 py-1 text-xs font-medium ${badge.bg} ${badge.text}`}>
                     {badge.label}
                   </span>
-                  <span className="text-xs text-gray-400 dark:text-slate-500">{paper.year}</span>
+                  <span className="text-xs text-gray-500 dark:text-slate-500">{paper.year}</span>
                 </div>
                 <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-slate-100">{paper.title}</h2>
-                <p className="mb-3 text-sm text-gray-500 dark:text-slate-400">{paper.authors.join(", ")}</p>
-                <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-gray-400 dark:text-slate-500">
+                <p className="mb-3 text-sm text-gray-600 dark:text-slate-400">{paper.authors.join(", ")}</p>
+                <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-gray-600 dark:text-slate-400">
                   {paper.abstract}
                 </p>
                 <div className="flex flex-wrap gap-3">

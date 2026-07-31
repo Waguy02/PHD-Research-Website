@@ -31,10 +31,10 @@ export default function Home() {
               Guy Stephane{" "}
               <span className="gradient-text">Waffo Dzuyo</span>
             </h1>
-            <p className="mb-2 text-xl text-gray-500 dark:text-slate-400">
+            <p className="mb-2 text-xl text-gray-600 dark:text-slate-300">
               PhD Candidate in Artificial Intelligence
             </p>
-            <p className="mb-6 text-gray-400 dark:text-slate-500">
+            <p className="mb-6 text-gray-600 dark:text-slate-400">
               <a href="https://www.loria.fr" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">LORIA</a>, CNRS, <a href="https://www.univ-lorraine.fr" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">Universite de Lorraine</a> &middot; <a href="https://www.forvismazars.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">Forvis Mazars</a>
             </p>
             <p className="max-w-2xl text-base leading-relaxed text-gray-600 dark:text-slate-400">
@@ -94,18 +94,18 @@ export default function Home() {
 
       {/* Research areas */}
       <section className="mb-20">
-        <h2 className="mb-6 text-2xl font-semibold dark:text-slate-100">Research Focus</h2>
+        <h2 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-slate-100">Research Focus</h2>
         <div className="grid gap-5 md:grid-cols-2">
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 card-hover dark:border-slate-700 dark:bg-slate-800/50">
             <h3 className="mb-2 font-semibold text-gray-900 dark:text-slate-100">Time Series Forecasting</h3>
-            <p className="text-sm leading-relaxed text-gray-500 dark:text-slate-400">
+            <p className="text-sm leading-relaxed text-gray-600 dark:text-slate-400">
               Leveraging state space models and deep learning architectures for
               financial time series prediction and trend analysis.
             </p>
           </div>
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 card-hover dark:border-slate-700 dark:bg-slate-800/50">
             <h3 className="mb-2 font-semibold text-gray-900 dark:text-slate-100">Journal Entries Anomaly Detection</h3>
-            <p className="text-sm leading-relaxed text-gray-500 dark:text-slate-400">
+            <p className="text-sm leading-relaxed text-gray-600 dark:text-slate-400">
               Detecting irregular and fraudulent journal entries using graph-based
               and sequential anomaly detection methods in audit data.
             </p>
@@ -116,7 +116,7 @@ export default function Home() {
       {/* Publications */}
       <section>
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold dark:text-slate-100">Publications</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100">Publications</h2>
           <Link
             href="/publications"
             className="text-sm font-medium text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"

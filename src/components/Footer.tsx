@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t border-gray-200 bg-white dark:border-slate-800 dark:bg-slate-950">
       <div className="mx-auto max-w-5xl px-6 py-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <div className="flex items-center gap-4 text-sm text-gray-400 dark:text-slate-500">
+          <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-slate-500">
             <span>&copy; {new Date().getFullYear()} Guy Stephane Waffo Dzuyo</span>
           </div>
           <div className="flex items-center gap-4">

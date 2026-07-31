@@ -17,11 +17,11 @@ const typeLabels: Record<string, string> = {
 export default function CVPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="mb-2 text-4xl font-bold tracking-tight dark:text-slate-100">Research Timeline</h1>
-      <p className="mb-12 text-gray-500 dark:text-slate-400">Academic journey and research milestones.</p>
+      <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100">Research Timeline</h1>
+      <p className="mb-12 text-gray-600 dark:text-slate-400">Academic journey and research milestones.</p>
 
       <section className="mb-16">
-        <h2 className="mb-6 text-xl font-semibold dark:text-slate-100">Timeline</h2>
+        <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-slate-100">Timeline</h2>
         <div className="relative">
           <div className="absolute left-[19px] top-2 h-[calc(100%-1.5rem)] w-px bg-gray-200 dark:bg-slate-700" />
           <div className="space-y-6">
@@ -39,7 +39,7 @@ export default function CVPage() {
                         {typeLabels[event.type] || event.type}
                       </span>
                     </div>
-                    <p className="text-sm leading-relaxed text-gray-500 dark:text-slate-400">{event.description}</p>
+                    <p className="text-sm leading-relaxed text-gray-600 dark:text-slate-400">{event.description}</p>
                   </div>
                 </div>
               );
@@ -49,7 +49,7 @@ export default function CVPage() {
       </section>
 
       <section className="mb-16">
-        <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">Skills & Tools</h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-slate-100">Skills & Tools</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { title: "Machine Learning", items: ["PyTorch", "Transformers", "Mamba/SSM", "LightGBM", "XGBoost"] },
@@ -71,13 +71,13 @@ export default function CVPage() {
       </section>
 
       <section>
-        <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">Education</h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-slate-100">Education</h2>
         <div className="space-y-4">
           <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
             <h3 className="mb-1 font-semibold text-gray-900 dark:text-slate-100">PhD in Artificial Intelligence</h3>
             <p className="mb-2 text-sm text-gray-500 dark:text-slate-400"><a href="https://www.loria.fr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">LORIA</a>, CNRS, <a href="https://www.univ-lorraine.fr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">Universite de Lorraine</a> / <a href="https://www.forvismazars.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">Forvis Mazars</a></p>
             <p className="mb-2 text-sm text-gray-500 dark:text-slate-400">CIFRE Agreement &middot; 2024 - Present</p>
-            <p className="text-sm text-gray-400 dark:text-slate-500">
+            <p className="text-sm text-gray-600 dark:text-slate-400">
               Researching AI methods for financial auditing, combining NLP and structured data analysis for industry classification and fraud detection using multimodal LLMs.
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function CVPage() {
               Engineering Degree - Mathematical Modelling, Data Science & AI
             </h3>
             <p className="mb-2 text-sm text-gray-500 dark:text-slate-400">Grenoble INP - Ensimag</p>
-            <p className="text-sm text-gray-400 dark:text-slate-500">
+            <p className="text-sm text-gray-600 dark:text-slate-400">
               Graduated with a diploma in mathematical modelling, data science and artificial intelligence.
             </p>
           </div>

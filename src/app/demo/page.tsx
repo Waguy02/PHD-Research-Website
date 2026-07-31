@@ -210,7 +210,7 @@ function TabContent({ activeTab, basePath }: { activeTab: Tab; basePath: string 
     return (
       <section className="space-y-8">
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 dark:border-slate-700 dark:bg-slate-800/50">
-          <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">End-to-End Data Pipeline</h2>
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-slate-100">End-to-End Data Pipeline</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {pipelineSteps.map((step) => (
               <div
@@ -280,11 +280,11 @@ function TabContent({ activeTab, basePath }: { activeTab: Tab; basePath: string 
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             <div className="rounded bg-white p-3 text-center dark:bg-slate-800">
               <div className="text-lg font-bold text-blue-600 dark:text-blue-400">~3,800</div>
-              <div className="text-xs text-gray-400 dark:text-slate-500">tokens avg per summary</div>
+              <div className="text-xs text-gray-500 dark:text-slate-500">tokens avg per summary</div>
             </div>
             <div className="rounded bg-white p-3 text-center dark:bg-slate-800">
               <div className="text-lg font-bold text-blue-600 dark:text-blue-400">100</div>
-              <div className="text-xs text-gray-400 dark:text-slate-500">max insights per section</div>
+              <div className="text-xs text-gray-500 dark:text-slate-500">max insights per section</div>
             </div>
             <div className="rounded bg-white p-3 text-center dark:bg-slate-800">
               <div className="text-lg font-bold text-blue-600 dark:text-blue-400">Qwen3-32B</div>
@@ -311,8 +311,8 @@ function TabContent({ activeTab, basePath }: { activeTab: Tab; basePath: string 
 
         {/* Misstatement distribution */}
         <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-          <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">Misstatement Type Distribution</h2>
-          <p className="mb-4 text-sm text-gray-500 dark:text-slate-400">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-slate-100">Misstatement Type Distribution</h2>
+          <p className="mb-4 text-sm text-gray-600 dark:text-slate-400">
             Breakdown of 1,451 AAER-linked fraud cases by misstatement type (11 types, Marketable Securities excluded from training)
           </p>
           <BarChart
@@ -344,9 +344,9 @@ function DatasetSlideshow() {
     return (
       <section className="space-y-8">
         <div className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-12 dark:border-slate-700 dark:bg-slate-800">
-          <div className="text-center text-gray-500 dark:text-slate-400">
+          <div className="text-center text-gray-600 dark:text-slate-400">
             <div className="mb-2 text-lg font-medium">Loading dataset samples...</div>
-            <div className="text-sm text-gray-400 dark:text-slate-500">Fetching real SEC filing data from the CI-FSFD benchmark.</div>
+            <div className="text-sm text-gray-500 dark:text-slate-500">Fetching real SEC filing data from the CI-FSFD benchmark.</div>
           </div>
         </div>
       </section>
@@ -361,7 +361,7 @@ function DatasetSlideshow() {
     <section className="space-y-8">
       {/* Dataset overview stats */}
       <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-        <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">Dataset Composition</h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-slate-100">Dataset Composition</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {[
             { label: "Companies", value: "13,332", sub: "unique" },
@@ -373,7 +373,7 @@ function DatasetSlideshow() {
           ].map((stat) => (
             <div key={stat.label} className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-center dark:border-slate-700 dark:bg-slate-800/50">
               <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stat.value}</div>
-              <div className="text-xs text-gray-400 dark:text-slate-500">{stat.sub}</div>
+              <div className="text-xs text-gray-500 dark:text-slate-500">{stat.sub}</div>
               <div className="mt-1 text-sm text-gray-600 dark:text-slate-400">{stat.label}</div>
             </div>
           ))}
@@ -382,7 +382,7 @@ function DatasetSlideshow() {
 
       {/* Slide navigation header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold dark:text-slate-100">Sample Explorer - Diaporama</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-100">Sample Explorer - Diaporama</h2>
         <div className="flex items-center gap-3">
           <span className="rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600 dark:bg-slate-800 dark:text-slate-300">
             {slideIdx + 1} / {mdaSlides.length}
@@ -601,7 +601,7 @@ function ArchitectureSection({ basePath }: { basePath: string }) {
     <section className="space-y-8">
       {/* Large SVG architecture schematic */}
       <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-8 dark:border-slate-700 dark:bg-slate-800">
-        <h2 className="mb-6 text-center text-xl font-semibold dark:text-slate-100">Fine-tuning Architecture - Flow Overview</h2>
+        <h2 className="mb-6 text-center text-xl font-semibold text-gray-900 dark:text-slate-100">Fine-tuning Architecture - Flow Overview</h2>
         <svg viewBox="0 0 900 560" className="w-full max-w-4xl mx-auto" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
           <defs>
             <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
@@ -795,8 +795,8 @@ function ResultsContent() {
     <section className="space-y-8">
       {/* Split method subtabs */}
       <div>
-        <h2 className="mb-3 text-xl font-semibold dark:text-slate-100">Evaluation Strategy</h2>
-        <p className="mb-4 text-sm text-gray-500 dark:text-slate-400">
+        <h2 className="mb-3 text-xl font-semibold text-gray-900 dark:text-slate-100">Evaluation Strategy</h2>
+        <p className="mb-4 text-sm text-gray-600 dark:text-slate-400">
           Choose the split method to see how data leakage affects reported performance.
         </p>
         <div className="flex gap-2">
@@ -939,7 +939,7 @@ function ResultsContent() {
 
           {/* Leakage comparison */}
           <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-            <h3 className="mb-4 text-lg font-semibold dark:text-slate-100">How Much Inflation? (Random vs CI-FSFD)</h3>
+            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-slate-100">How Much Inflation? (Random vs CI-FSFD)</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -968,7 +968,7 @@ function ResultsContent() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-xs text-gray-500 dark:text-slate-400">
+            <p className="mt-3 text-xs text-gray-600 dark:text-slate-400">
               Random splitting inflates AUC by <strong>0.15–0.19 points</strong> - turning a moderate 0.69–0.74 AUC
               into a misleading 0.87–0.92. This is why CI-FSFD is essential.
             </p>
@@ -978,7 +978,7 @@ function ResultsContent() {
 
       {/* Dataset imbalance note */}
       <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-        <h3 className="mb-3 text-lg font-semibold dark:text-slate-100">Class Imbalance &amp; Handling</h3>
+        <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-slate-100">Class Imbalance &amp; Handling</h3>
         <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-slate-400">
           Raw dataset has only 0.03% fraud cases. Training uses epoch-level undersampling to achieve 5% fraud
           distribution while preserving industry and time distributions. Threshold optimization via
@@ -1032,10 +1032,10 @@ export default function DemoPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
       {/* Header */}
-      <h1 className="mb-2 text-4xl font-bold tracking-tight dark:text-slate-100">
+      <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100">
         CI-FSFD Benchmark Explorer
       </h1>
-      <p className="mb-2 text-gray-500 dark:text-slate-400">
+      <p className="mb-2 text-gray-600 dark:text-slate-400">
         Interactive exploration of the benchmark from our IJCAI 2026 FINLLM paper.
       </p>
       <Link

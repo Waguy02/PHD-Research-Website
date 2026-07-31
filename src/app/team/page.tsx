@@ -7,8 +7,8 @@ export default function TeamPage() {
     : "";
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="mb-2 text-4xl font-bold tracking-tight dark:text-slate-100">Research Team</h1>
-      <p className="mb-12 text-gray-500 dark:text-slate-400">Collaborators and supervisors across academia and industry.</p>
+      <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-slate-100">Research Team</h1>
+      <p className="mb-12 text-gray-600 dark:text-slate-400">Collaborators and supervisors across academia and industry.</p>
 
       <div className="grid gap-6 md:grid-cols-2">
         {teamMembers.map((member) => (
@@ -35,11 +35,11 @@ export default function TeamPage() {
                 <p className="text-sm text-gray-500 dark:text-slate-400">{member.role}</p>
               </div>
             </div>
-            <p className="mb-2 text-sm text-gray-500 dark:text-slate-400">{member.affiliation}</p>
-            <p className="mb-4 text-sm leading-relaxed text-gray-400 dark:text-slate-500">{member.bio}</p>
+            <p className="mb-2 text-sm text-gray-600 dark:text-slate-400">{member.affiliation}</p>
+            <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-slate-400">{member.bio}</p>
             <div className="flex flex-wrap gap-3">
               {member.email && (
-                <a href={`mailto:${member.email}`} className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400">
+                <a href={`mailto:${member.email}`} className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
@@ -47,7 +47,7 @@ export default function TeamPage() {
                 </a>
               )}
               {member.website && (
-                <a href={member.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400">
+                <a href={member.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
@@ -60,7 +60,7 @@ export default function TeamPage() {
       </div>
 
       <section className="mt-16">
-        <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">Affiliations</h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-slate-100">Affiliations</h2>
         <div className="grid gap-4 sm:grid-cols-3">
           {[
             { name: "LORIA", url: "https://www.loria.fr", desc: "Laboratoire Lorrain de Recherche en Informatique et ses Applications", sub: "CNRS, Universite de Lorraine", logo: `${basePath}/images/logos/logo-loria-new.png` },
@@ -74,8 +74,8 @@ export default function TeamPage() {
                 </span>
               </div>
               <h3 className="mb-1 font-semibold text-gray-900 dark:text-slate-100">{aff.name}</h3>
-              <p className="text-sm text-gray-500 dark:text-slate-400">{aff.desc}</p>
-              <p className="mt-2 text-xs text-gray-400 dark:text-slate-500">{aff.sub}</p>
+              <p className="text-sm text-gray-600 dark:text-slate-400">{aff.desc}</p>
+              <p className="mt-2 text-xs text-gray-500 dark:text-slate-500">{aff.sub}</p>
             </a>
           ))}
         </div>
