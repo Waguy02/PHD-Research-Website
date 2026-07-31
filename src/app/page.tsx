@@ -182,9 +182,19 @@ export default function Home() {
             </div>
             <div>
               <h3 className="mb-2 font-medium text-gray-900 dark:text-slate-100">Affiliations</h3>
-              <ul className="space-y-1 text-sm text-gray-500 dark:text-slate-400">
-                <li><a href="https://www.loria.fr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">LORIA</a>, CNRS, <a href="https://www.univ-lorraine.fr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">Universite de Lorraine</a></li>
-                <li><a href="https://www.forvismazars.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">Forvis Mazars</a></li>
+              <ul className="space-y-2 text-sm text-gray-500 dark:text-slate-400">
+                <li>
+                  <a href="https://www.loria.fr" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:underline text-blue-600 dark:text-blue-400">
+                    <img src="/images/logos/logo-loria-new.png" alt="LORIA" className="h-5 object-contain" />
+                    LORIA, CNRS, <a href="https://www.univ-lorraine.fr" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:underline text-blue-600 dark:text-blue-400"><img src="/images/logos/logo-university-new.png" alt="Universite de Lorraine" className="h-4 object-contain" />Universite de Lorraine</a>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.forvismazars.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:underline text-blue-600 dark:text-blue-400">
+                    <img src="/images/logos/logo-forvis-mazars-new.png" alt="Forvis Mazars" className="h-5 object-contain" />
+                    Forvis Mazars
+                  </a>
+                </li>
               </ul>
             </div>
             <div>

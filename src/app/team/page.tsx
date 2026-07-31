@@ -63,11 +63,14 @@ export default function TeamPage() {
         <h2 className="mb-4 text-xl font-semibold dark:text-slate-100">Affiliations</h2>
         <div className="grid gap-4 sm:grid-cols-3">
           {[
-            { name: "LORIA", url: "https://www.loria.fr", desc: "Laboratoire Lorrain de Recherche en Informatique et ses Applications", sub: "CNRS, Universite de Lorraine" },
-            { name: "Forvis Mazars", url: "https://www.forvismazars.com", desc: "Global audit, tax, and advisory firm", sub: "Industry Partner" },
-            { name: "LIPN", url: "https://www-lipn.univ-paris13.fr", desc: "Laboratoire d'Informatique de Paris Nord", sub: "Universite Sorbonne Paris Nord, CNRS" },
+            { name: "LORIA", url: "https://www.loria.fr", desc: "Laboratoire Lorrain de Recherche en Informatique et ses Applications", sub: "CNRS, Universite de Lorraine", logo: "/images/logos/logo-loria-new.png" },
+            { name: "Forvis Mazars", url: "https://www.forvismazars.com", desc: "Global audit, tax, and advisory firm", sub: "Industry Partner", logo: "/images/logos/logo-forvis-mazars-new.png" },
+            { name: "LIPN", url: "https://www-lipn.univ-paris13.fr", desc: "Laboratoire d'Informatique de Paris Nord", sub: "Universite Sorbonne Paris Nord, CNRS", logo: "/images/logos/logo-loria-new.png" },
           ].map((aff) => (
             <a key={aff.name} href={aff.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border border-gray-200 bg-gray-50 p-5 card-hover dark:border-slate-700 dark:bg-slate-800/50">
+              <div className="mb-3 flex justify-center">
+                <img src={aff.logo} alt={aff.name} className="h-12 object-contain" />
+              </div>
               <h3 className="mb-1 font-semibold text-gray-900 dark:text-slate-100">{aff.name}</h3>
               <p className="text-sm text-gray-500 dark:text-slate-400">{aff.desc}</p>
               <p className="mt-2 text-xs text-gray-400 dark:text-slate-500">{aff.sub}</p>
