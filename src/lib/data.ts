@@ -55,12 +55,12 @@ export const papers: Paper[] = [
     tags: ["published", "AAAI", "industry classification", "financial NLP"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
-      "Gael Guibon",
+      "Gaël Guibon",
       "Christophe Cerisara",
       "Luis Belmar-Letelier",
     ],
     abstract:
-      "We explore the potential of machine learning algorithms and language models to analyze the relationship between industry sector categories and companies' financial statements. We propose a supervised company classification methodology analyzing several types of representations for financial statements. We show that textual information in financial records can be leveraged by language models to match decision tree-based classifier performance while providing better explainability. Our proposed Text-Numeric Transformer — a fusion of tag embeddings with amounts via a gating mechanism — achieves the best MCC of 0.71. LLM-gen (generative classification) with FinLLaMA3 achieves MCC 0.66 and provides explainable predictions, while LightGBM establishes strong baselines with MCC 0.69.",
+      "We explore the potential of machine learning algorithms and language models to analyze the relationship between industry sector categories and companies' financial statements. We propose a supervised company classification methodology analyzing several types of representations for financial statements. We show that textual information in financial records can be leveraged by language models to match decision tree-based classifier performance while providing better explainability. Our proposed Text-Numeric Transformer - a fusion of tag embeddings with amounts via a gating mechanism - achieves the best MCC of 0.71. LLM-gen (generative classification) with FinLLaMA3 achieves MCC 0.66 and provides explainable predictions, while LightGBM establishes strong baselines with MCC 0.69.",
     links: [
       {
         label: "Code (GitHub)",
@@ -76,7 +76,7 @@ export const papers: Paper[] = [
       },
     ],
     keyResults: [
-      "Text-Numeric Transformer achieves MCC 0.71 — best overall performance",
+      "Text-Numeric Transformer achieves MCC 0.71 - best overall performance",
       "LLM-gen with FinLLaMA3 provides explainable predictions at MCC 0.66",
       "LightGBM baseline reaches MCC 0.69 as a strong non-neural baseline",
       "Textual information matches numerical performance with added explainability",
@@ -92,7 +92,7 @@ export const papers: Paper[] = [
     tags: ["accepted", "IJCAI", "FINLLM", "fraud detection", "benchmark"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
-      "Gael Guibon",
+      "Gaël Guibon",
       "Christophe Cerisara",
       "Luis Belmar-Letelier",
     ],
@@ -110,7 +110,7 @@ export const papers: Paper[] = [
     ],
     keyResults: [
       "Fino1-8B with SMD&A text achieves best CI-FSFD AUC of 0.74",
-      "Random split inflates AUC to 0.96 — company-isolated evaluation is essential",
+      "Random split inflates AUC to 0.96 - company-isolated evaluation is essential",
       "Text-only SMD&A outperforms combined FIN+SMD&A (noise bottleneck)",
       "Zero-shot LLMs perform at chance (~0.50 AUC)",
     ],
@@ -125,12 +125,12 @@ export const papers: Paper[] = [
     tags: ["under_review", "NeurIPS", "state space models", "financial NLP", "Mamba"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
-      "Gael Guibon",
+      "Gaël Guibon",
       "Christophe Cerisara",
       "Luis Belmar-Letelier",
     ],
     abstract:
-      "We introduce SemMamba, a novel architecture leveraging State Space Models (SSMs) — specifically the Mamba architecture — for financial statement analysis. Unlike Transformers, Mamba models achieve linear-time inference and selective sequence modeling, making them ideal for long financial documents. We adapt Mamba to jointly process structured financial indicators and unstructured MD&A text, enabling efficient fraud detection at scale. Our experiments show competitive performance against LLM-based approaches while significantly reducing computational cost.",
+      "We introduce SemMamba, a novel architecture leveraging State Space Models (SSMs) - specifically the Mamba architecture - for financial statement analysis. Unlike Transformers, Mamba models achieve linear-time inference and selective sequence modeling, making them ideal for long financial documents. We adapt Mamba to jointly process structured financial indicators and unstructured MD&A text, enabling efficient fraud detection at scale. Our experiments show competitive performance against LLM-based approaches while significantly reducing computational cost.",
     links: [],
     keyResults: [
       "Mamba architecture adapted for financial statement analysis",
@@ -164,11 +164,12 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: "gael",
-    name: "Gael Guibon",
+    name: "Gaël Guibon",
     role: "Research Supervisor",
     affiliation:
       "LORIA, CNRS, Universite de Lorraine / LIPN, Universite Sorbonne Paris Nord",
     email: "gael.guibon@lipn.fr",
+    website: "https://gguibon.github.io/",
     image: "gael-guibon.png",
     bio: "Researcher specializing in NLP and financial text analysis. Affiliated with both LORIA and LIPN.",
   },
@@ -178,6 +179,7 @@ export const teamMembers: TeamMember[] = [
     role: "Industry Supervisor",
     affiliation: "Forvis Mazars",
     email: "luis.belmar-letelier@mazars.fr",
+    website: "https://fr.linkedin.com/in/luisbelmarletelier",
     image: "luis-belmar.png",
     bio: "Industry expert at Forvis Mazars, bringing domain expertise in financial auditing and company analysis.",
   },
@@ -186,7 +188,7 @@ export const teamMembers: TeamMember[] = [
 export const timelineEvents: TimelineEvent[] = [
   {
     year: 2023,
-    title: "Engineering Degree — Grenoble INP - Ensimag",
+    title: "Engineering Degree - Grenoble INP - Ensimag",
     description:
       "Graduated with a diploma in Mathematical Modelling, Data Science and Artificial Intelligence from Grenoble INP - Ensimag.",
     type: "education",
@@ -200,14 +202,14 @@ export const timelineEvents: TimelineEvent[] = [
   },
   {
     year: 2025,
-    title: "AAAI 2025 — Industry Sector Classification",
+    title: "AAAI 2025 - Industry Sector Classification",
     description:
       "Published at AAAI 2025: A hybrid approach combining Text-Numeric Transformers and LLMs for company classification by industry sector.",
     type: "paper",
   },
   {
     year: 2026,
-    title: "IJCAI 2026 FINLLM — Fraud Detection Benchmark",
+    title: "IJCAI 2026 FINLLM - Fraud Detection Benchmark",
     description:
       "Accepted at IJCAI-ECAI 2026 FINLLM Workshop: CI-FSFD benchmark for robust evaluation of financial statement fraud detection.",
     type: "paper",

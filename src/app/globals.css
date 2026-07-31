@@ -9,6 +9,19 @@
   --accent-light: #dbeafe;
   --card-bg: #f9fafb;
   --card-hover-border: #93c5fd;
+  --card-shadow: rgba(37, 99, 235, 0.08);
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --accent: #60a5fa;
+  --accent-light: #1e3a5f;
+  --card-bg: #1e293b;
+  --card-hover-border: #3b82f6;
+  --card-shadow: rgba(96, 165, 250, 0.1);
 }
 
 @theme inline {
@@ -31,6 +44,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Subtle container max-width for nice readability */
@@ -48,13 +62,21 @@ body {
   background-clip: text;
 }
 
+.dark .gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Card hover effect */
 .card-hover {
   transition: all 0.2s ease;
 }
+
 .card-hover:hover {
   border-color: var(--card-hover-border);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 4px 12px var(--card-shadow);
 }
 
 /* Paper link underline effect */
@@ -65,4 +87,27 @@ body {
 }
 .link-underline:hover {
   border-bottom-color: currentColor;
+}
+
+/* Scrollbar dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* SVG text color inheritance */
+.dark .svg-text {
+  fill: #cbd5e1;
+}
+
+.dark .svg-label {
+  fill: #94a3b8;
 }
