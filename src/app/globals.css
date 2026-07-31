@@ -111,3 +111,14 @@ body {
 .dark .svg-label {
   fill: #94a3b8;
 }
+
+/* Logo wrapper - white background for dark mode only */
+.logo-wrapper {
+  display: inline-block;
+}
+
+.dark .logo-wrapper {
+  background: #ffffff;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
