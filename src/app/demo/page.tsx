@@ -205,7 +205,7 @@ function BarChart({ data, valueKey, labelKey, color = "#2563eb" }: {
 }
 
 // ─── Component: Tabbed sections ────────────────────────────────────
-function TabContent({ activeTab }: { activeTab: Tab }) {
+function TabContent({ activeTab, basePath }: { activeTab: Tab; basePath: string }) {
   if (activeTab === "pipeline") {
     return (
       <section className="space-y-8">
@@ -327,7 +327,7 @@ function TabContent({ activeTab }: { activeTab: Tab }) {
   }
 
   if (activeTab === "architecture") {
-    return <ArchitectureSection />;
+    return <ArchitectureSection basePath={basePath} />;
   }
 
   if (activeTab === "results") {
@@ -596,7 +596,7 @@ function DatasetSlideshow() {
 }
 
 // ─── Architecture Section with SVG Diagram ─────────────────────────
-function ArchitectureSection() {
+function ArchitectureSection({ basePath }: { basePath: string }) {
   return (
     <section className="space-y-8">
       {/* Large SVG architecture schematic */}
@@ -691,9 +691,9 @@ function ArchitectureSection() {
           <text x="450" y="455" textAnchor="middle" fontSize="9" fill="#94a3b8">Affiliations: Forvis Mazars · LORIA (CNRS, Universite de Lorraine) · LIPN (CNRS, Universite Sorbonne Paris Nord)</text>
 
           {/* ====== LOGOS ROW ====== */}
-          <image href="/images/logos/logo-forvis-mazars-title.jpeg" x="230" y="480" height="28" preserveAspectRatio="xMidYMid meet"/>
-          <image href="/images/logos/logo-loria.png" x="430" y="475" height="36" preserveAspectRatio="xMidYMid meet"/>
-          <image href="/images/logos/logo-university.png" x="550" y="475" height="38" preserveAspectRatio="xMidYMid meet"/>
+          <image href={`${basePath}/images/logos/logo-forvis-mazars-title.jpeg`} x="230" y="480" height="28" preserveAspectRatio="xMidYMid meet"/>
+          <image href={`${basePath}/images/logos/logo-loria.png`} x="430" y="475" height="36" preserveAspectRatio="xMidYMid meet"/>
+          <image href={`${basePath}/images/logos/logo-university.png`} x="550" y="475" height="38" preserveAspectRatio="xMidYMid meet"/>
           <text x="450" y="438" textAnchor="middle" fontSize="9" fill="#94a3b8">All use the same LoRA (r=8, &alpha;=8) and softmax head setup</text>
         </svg>
       </div>
@@ -1006,13 +1006,16 @@ function ResultsContent() {
 // ─── Main component ────────────────────────────────────────────────
 export default function DemoPage() {
   const [activeTab, setActiveTab] = useState<Tab>("pipeline");
+  const [basePath, setBasePath] = useState("");
 
   const [, forceUpdate] = useState(0);
 
   useEffect(() => {
+    const computedBasePath = window.location.pathname.replace(/\/demo\/?$/, "");
+    setBasePath(computedBasePath);
+
     if (mdaSlides.length === 0) {
-      const basePath = window.location.pathname.replace(/\/demo\/?$/, "");
-      fetch(basePath + "/mda_data.json")
+      fetch(computedBasePath + "/mda_data.json")
         .then((r) => {
           if (!r.ok) throw new Error("HTTP " + r.status);
           return r.json();
@@ -1077,7 +1080,7 @@ export default function DemoPage() {
       </div>
 
       {/* Tab content */}
-      <TabContent activeTab={activeTab} />
+      <TabContent activeTab={activeTab} basePath={basePath} />
     </div>
   );
 }

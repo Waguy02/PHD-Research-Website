@@ -170,13 +170,13 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-gray-500 dark:text-slate-400">
                 <li>
                   <a href="https://www.loria.fr" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:underline text-blue-600 dark:text-blue-400">
-                    <img src="/images/logos/logo-loria-new.png" alt="LORIA" className="h-5 object-contain" />
-                    LORIA, CNRS, <a href="https://www.univ-lorraine.fr" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:underline text-blue-600 dark:text-blue-400"><img src="/images/logos/logo-university-new.png" alt="Universite de Lorraine" className="h-4 object-contain" />Universite de Lorraine</a>
+                    <img src={`${basePath}/images/logos/logo-loria-new.png`} alt="LORIA" className="h-5 object-contain" />
+                    LORIA, CNRS, <a href="https://www.univ-lorraine.fr" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:underline text-blue-600 dark:text-blue-400"><img src={`${basePath}/images/logos/logo-university-new.png`} alt="Universite de Lorraine" className="h-4 object-contain" />Universite de Lorraine</a>
                   </a>
                 </li>
                 <li>
                   <a href="https://www.forvismazars.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:underline text-blue-600 dark:text-blue-400">
-                    <img src="/images/logos/logo-forvis-mazars-new.png" alt="Forvis Mazars" className="h-5 object-contain" />
+                    <img src={`${basePath}/images/logos/logo-forvis-mazars-new.png`} alt="Forvis Mazars" className="h-5 object-contain" />
                     Forvis Mazars
                   </a>
                 </li>
