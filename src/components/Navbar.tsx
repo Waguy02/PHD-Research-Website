@@ -44,68 +44,64 @@ export default function Navbar() {
           <span className="gradient-text">G.S. Waffo Dzuyo</span>
         </Link>
 
-        <div className="flex items-center gap-2">
-          {/* Desktop links */}
-          <div className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => {
-              const isActive =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative text-sm font-medium transition-colors ${
-                    isActive
-                      ? "text-blue-600 dark:text-blue-400"
-                      : "text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-200"
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute -bottom-4 left-0 right-0 h-0.5 rounded-full bg-blue-600 dark:bg-blue-400" />
-                  )}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Theme toggle */}
+        {/* Desktop links */}
+        <div className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative text-sm font-medium transition-colors ${
+                  isActive
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-200"
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="absolute -bottom-4 left-0 right-0 h-0.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                )}
+              </Link>
+            );
+          })}
           <ThemeToggle />
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-gray-500 md:hidden hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-200"
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileOpen}
-          >
-            <svg
-              className="h-6 w-6 transition-transform duration-200"
-              style={{ transform: mobileOpen ? "rotate(90deg)" : "none" }}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {mobileOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
         </div>
+
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="text-gray-500 md:hidden hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-200"
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileOpen}
+        >
+          <svg
+            className="h-6 w-6 transition-transform duration-200"
+            style={{ transform: mobileOpen ? "rotate(90deg)" : "none" }}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            {mobileOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
       </div>
 
       {/* Mobile links */}
@@ -114,7 +110,7 @@ export default function Navbar() {
           mobileOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="border-t border-gray-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-950 md:hidden">
+        <div className="border-t border-gray-200 bg-white px-6 py-4 md:hidden dark:border-slate-800 dark:bg-slate-950">
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive =
@@ -136,6 +132,10 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            <div className="flex items-center justify-between border-t border-gray-100 pt-3 dark:border-slate-800">
+              <span className="text-sm text-gray-500 dark:text-slate-400">Theme</span>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

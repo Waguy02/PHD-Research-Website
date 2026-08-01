@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Use class-based dark mode instead of media-query */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #111827;
@@ -9,19 +12,16 @@
   --accent-light: #dbeafe;
   --card-bg: #f9fafb;
   --card-hover-border: #93c5fd;
-  --card-shadow: rgba(37, 99, 235, 0.08);
 }
 
 .dark {
   --background: #0f172a;
   --foreground: #f1f5f9;
-  --muted: #94a3b8;
   --border: #1e293b;
   --accent: #60a5fa;
   --accent-light: #1e3a5f;
   --card-bg: #1e293b;
   --card-hover-border: #3b82f6;
-  --card-shadow: rgba(96, 165, 250, 0.1);
 }
 
 @theme inline {
@@ -73,10 +73,9 @@ body {
 .card-hover {
   transition: all 0.2s ease;
 }
-
 .card-hover:hover {
   border-color: var(--card-hover-border);
-  box-shadow: 0 4px 12px var(--card-shadow);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
 }
 
 /* Paper link underline effect */

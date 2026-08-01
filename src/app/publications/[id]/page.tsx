@@ -39,7 +39,7 @@ export default async function PaperDetailPage({
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Link
         href="/publications"
-        className="mb-8 inline-flex items-center gap-1 text-sm text-gray-600 transition-colors hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-200"
+        className="mb-8 inline-flex items-center gap-1 text-sm text-gray-500 transition-colors hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-200"
       >
         <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -53,14 +53,14 @@ export default async function PaperDetailPage({
             <span className="rounded bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
               {paper.venue}
             </span>
-            <span className="rounded bg-green-50 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-900/40 dark:text-green-300">
+            <span className="rounded bg-green-50 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-900/40 dark:text-green-400">
               {paper.year}
             </span>
           </div>
-          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl text-gray-900 dark:text-slate-100">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
             {paper.title}
           </h1>
-          <p className="mb-6 text-base text-gray-600 dark:text-slate-400">{paper.authors.join(", ")}</p>
+          <p className="mb-6 text-base text-gray-500 dark:text-slate-400">{paper.authors.join(", ")}</p>
 
           <div className="flex flex-wrap gap-2">
             {paper.links.map((link) => (
@@ -69,7 +69,7 @@ export default async function PaperDetailPage({
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:border-blue-300 hover:text-blue-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+                className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:border-blue-300 hover:text-blue-700 dark:border-slate-800 dark:text-slate-400 dark:hover:border-blue-700 dark:hover:text-blue-400"
               >
                 {link.label}
               </a>
@@ -78,17 +78,17 @@ export default async function PaperDetailPage({
         </div>
 
         <section className="mb-10">
-          <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-slate-100">Abstract</h2>
+          <h2 className="mb-3 text-lg font-semibold">Abstract</h2>
           <p className="leading-relaxed text-gray-600 dark:text-slate-400">{paper.abstract}</p>
         </section>
 
         {paper.keyResults && paper.keyResults.length > 0 && (
           <section className="mb-10">
-            <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-slate-100">Key Results</h2>
+            <h2 className="mb-3 text-lg font-semibold">Key Results</h2>
             <ul className="space-y-2">
               {paper.keyResults.map((result, i) => (
                 <li key={i} className="flex gap-3 text-gray-600 dark:text-slate-400">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 dark:bg-blue-400" />
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
                   <span>{result}</span>
                 </li>
               ))}
@@ -97,8 +97,8 @@ export default async function PaperDetailPage({
         )}
 
         <section>
-          <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-slate-100">Citation</h2>
-          <pre className="overflow-x-auto rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+          <h2 className="mb-3 text-lg font-semibold">Citation</h2>
+          <pre className="overflow-x-auto rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
             {bibtexMap[paper.id] || `@inproceedings{waffo${paper.year},
   title={${paper.title}},
   author={${paper.authors.join(" and ")}},
