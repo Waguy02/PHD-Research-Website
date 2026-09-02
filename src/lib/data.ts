@@ -116,6 +116,36 @@ export const papers: Paper[] = [
     ],
   },
   {
+    id: "forensicbench-emnlp-2026",
+    title:
+      "ForensicBench: Evaluating Agentic LLMs on Journal-Entry Fraud Detection",
+    venue: "EMNLP 2026 Industry Track",
+    year: 2026,
+    status: "accepted",
+    tags: ["accepted", "EMNLP", "fraud detection", "benchmark", "agentic LLMs"],
+    authors: [
+      "Guy Stephane Waffo Dzuyo",
+      "Gael Guibon",
+      "Christophe Cerisara",
+      "Luis Belmar-Letelier",
+    ],
+    abstract:
+      "Accounting fraud costs organizations billions annually, yet auditors rarely confront it as a single suspicious posting. Instead, they investigate coordinated fraud schemes such as fictitious vendor payments, ghost-employee payroll, and inflated revenues that span many journal entries, each individually routine, and only become visible when understood against the underlying accounting process. Existing AI systems either score isolated entries as anomalies or mine company-level disclosures; none evaluate whether a large language model (LLM) agent can query a live ledger, recover coordinated fraud patterns, and assign the correct scheme type. We release ForensicBench: the first benchmark for evaluating agentic LLMs on scheme-level journal-entry fraud detection. The dataset, Forensic Ledger, extends DataSynth with five injected fraud scheme types and scheme-level labels linking journal entries to coordinated instances. We evaluate twelve open-weight models under a single reference agent scaffold on a public leaderboard: among them, the best reaches only 34.7% Entry-F1, and Type-F1 is up to 13 points lower. We publicly release the dataset, evaluation harness, and a reference agentic baseline.",
+    links: [
+      {
+        label: "OpenReview",
+        url: "https://openreview.net/forum?id=587",
+      },
+    ],
+    keyResults: [
+      "First benchmark for scheme-level journal-entry fraud detection by agentic LLMs",
+      "Forensic Ledger: synthetic multi-sector ledgers with 5 injected fraud schemes and scheme-level labels",
+      "12 open-weight models evaluated: best reaches only 34.7% Entry-F1 (Type-F1 up to 13 points lower)",
+      "Rule-based oracle recovers 78-91% of schemes, confirming the benchmark is solvable",
+      "Dataset, evaluation harness, and reference agentic baseline publicly released",
+    ],
+  },
+  {
     id: "semmamba-neurips-2026",
     title:
       "SemMamba: State Space Models for Financial Statement Analysis",
@@ -210,6 +240,13 @@ export const timelineEvents: TimelineEvent[] = [
     title: "IJCAI 2026 FINLLM — Fraud Detection Benchmark",
     description:
       "Accepted at IJCAI-ECAI 2026 FINLLM Workshop: CI-FSFD benchmark for robust evaluation of financial statement fraud detection.",
+    type: "paper",
+  },
+  {
+    year: 2026,
+    title: "EMNLP 2026 Industry Track — ForensicBench",
+    description:
+      "Accepted at EMNLP 2026 Industry Track: ForensicBench, the first benchmark for evaluating agentic LLMs on scheme-level journal-entry fraud detection.",
     type: "paper",
   },
   {
