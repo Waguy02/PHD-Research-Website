@@ -1,0 +1,152 @@
+%!TEX program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%=======================================================================
+%  Guy Stephane Waffo Dzuyo -- Elegant one-page CV (v2)
+%=======================================================================
+
+\documentclass[10pt,letterpaper]{article}
+
+%----------------------- Packages -----------------------
+\usepackage[letterpaper,top=0.7cm,bottom=0.65cm,left=1.35cm,right=1.35cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Lato}[
+  BoldFont={Lato Semibold},
+  ItalicFont={Lato Italic},
+  BoldItalicFont={Lato Bold Italic},
+]
+\newfontfamily\displayfont{EB Garamond}[
+  BoldFont={EB Garamond 12 Bold},
+  ItalicFont={EB Garamond 12 Italic},
+]
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fontawesome5}
+\usepackage[hyphens]{url}
+\urlstyle{same}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{etoolbox}
+\setstretch{0.9}
+
+%----------------------- Palette -----------------------
+\definecolor{accent}{HTML}{1F4E79}
+\definecolor{soft}{HTML}{5B6472}
+
+\color{black}
+\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent,citecolor=accent,
+  pdftitle={Guy Stephane Waffo Dzuyo -- CV},pdfauthor={Guy Stephane Waffo Dzuyo}}
+\pagestyle{empty}
+
+%----------------------- Layout helpers -----------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.4em,nosep,topsep=2.5pt,itemsep=1.5pt}
+
+% Section heading: accent small-caps + thin rule
+\newcommand{\sechead}[1]{%
+  \par\vspace{5pt}
+  {\color{accent}\bfseries\small #1}\par
+  {\vspace{1.5pt}\color{accent!40}\rule{\linewidth}{0.5pt}}\par\vspace{2.5pt}}
+
+% Entry: bold title + right-aligned date, italic sub-line
+\newcommand{\entry}[3]{%
+  \par\vspace{3pt}
+  \textbf{#1}\hfill{\color{soft}\small #2}\par
+  {\color{soft}\small\itshape #3}\par\vspace{0.5pt}}
+
+% Publication: bold title, venue + optional right-aligned link, optional TLDR line
+\newcommand{\pub}[5][]{%
+  \textbf{#2}\par
+  {\color{soft}\small #3\ifstrempty{#4}{ }{ \hfill \href{#4}{#5}}}\par
+  \ifstrempty{#1}{ }{{\color{soft}\itshape\small #1}\par}\vspace{2pt}}
+
+% Skill line: accent label + items
+\newcommand{\skill}[2]{\textbf{\color{accent}#1}\;\; #2\par\vspace{0.3pt}}
+
+%----------------------- Document -----------------------
+\begin{document}
+
+%==================== HEADER ====================
+\begin{center}
+  {\displayfont\fontsize{27}{30}\selectfont\bfseries Guy Stephane Waffo Dzuyo}\par\vspace{2pt}
+  {\color{accent}\itshape\small Machine Learning Researcher \(\cdot\) Financial Fraud Detection \(\cdot\) Large Language Models}\par\vspace{5pt}
+  {\color{soft}\scriptsize
+    \faPhone\ +33 (0)7 58 87 58 00 \;\;\
+    \faEnvelope\ \href{mailto:guywaffo@gmail.com}{guywaffo@gmail.com} \;\;\
+    \faMapMarker\ Paris, France}\par\vspace{2pt}
+  {\color{soft}\scriptsize
+    \faHome\ \href{https://waguy02.github.io/PHD-Research-Website/}{My Website} \;\;\
+    \faGithub\ \href{https://github.com/Waguy02}{Waguy02} \;\;\
+    \faLinkedin\ \href{https://linkedin.com/in/waguy02}{waguy02} \;\;\
+    \faTwitter\ \href{https://twitter.com/GDzuyo}{GDzuyo}}\par
+\end{center}
+{\vspace{2pt}\color{accent}\rule{\linewidth}{1.1pt}}
+
+%==================== EDUCATION ====================
+\sechead{Education}
+\entry{MSc in AI \& Data Science (MOSIG) \(\cdot\) Double degree}{2021 -- 2022}{Grenoble INP-ENSIMAG --- MSc + 3rd-year Engineering}
+\entry{Engineering Degree in Computer Science}{2020 -- 2021}{Grenoble INP-ENSIMAG --- Grenoble, France}
+\entry{Computer Science, Mathematics \& Physics}{2016 -- 2020}{National Advanced School of Engineering --- Yaoundé, Cameroon}
+
+%==================== EXPERIENCE ====================
+\sechead{Work Experience}
+\entry{Cifre PhD Student --- LORIA / Forvis-Mazars}{Apr 2024 -- present}{Nancy / Paris, France}
+\begin{itemize}
+  \item Pattern recognition --- sector-specific patterns in balance sheets \& income statements
+  \item Causal modeling \& anomaly detection --- temporal dependencies of journal entries
+  \item Risk assessment --- risk scoring of financial-statement sections
+\end{itemize}
+\entry{Machine Learning Engineer --- Forvis-Mazars}{Jun 2023 -- present}{Paris, France}
+\begin{itemize}
+  \item Generative AI applications for audit workflow enhancement
+  \item LLM deployment \& optimisation with vLLM
+\end{itemize}
+\entry{R\&D Engineer --- OWI}{Oct 2022 -- Jun 2023}{Antony, France}
+\begin{itemize}
+  \item ML-based chatbot engine powered by a business knowledge base
+\end{itemize}
+\entry{Data Science Research Intern (PFE) --- Dassault Systems}{Feb 2022 -- Aug 2022}{Velizy-Villacoublay, France}
+\begin{itemize}
+  \item Style-based 3D indoor-scene recommendation (metric learning \& transformer decoders)
+\end{itemize}
+
+%==================== PUBLICATIONS ====================
+\sechead{Publications}
+\pub[Company-isolated financial-statement fraud-detection benchmark showing random splits inflate AUC; per-company evaluation is essential for honest generalization.]{Benchmarking Generalization in Financial Statement Fraud Detection: Robust Evaluation and Novel Tasks}{IJCAI-ECAI 2026 (FINLLM), Bremen --- Published 2026}{https://arxiv.org/abs/2607.19259}{arXiv}
+\pub[First benchmark for agentic LLMs on scheme-level journal-entry fraud detection; 12 open-weight models, best reaches 34.7\% Entry-F1.]{ForensicBench: Evaluating Agentic LLMs on Journal-Entry Fraud Detection}{EMNLP 2026 (Industry Track), Budapest --- Accepted 2026}{https://openreview.net/forum?id=587}{OpenReview}
+\pub[Hybrid text--numeric model classifying industry sectors from financial statements (best MCC 0.71).]{Linking Industry Sectors and Financial Statements: A Hybrid Approach}{AAAI 2025, Philadelphia --- Published}{https://ojs.aaai.org/index.php/AAAI/article/view/33806}{AAAI}
+\pub[SMAs-and-SIRs model simulating the evolution of COVID-19 in Cameroon.]{SISDH: Simulating the Evolution of COVID-19 in Cameroon}{WJET 2021 --- Published}{}{}
+
+%==================== SKILLS & LANGUAGES ====================
+\sechead{Skills \& Languages}
+\small
+\renewcommand{\arraystretch}{1.02}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{@{}p{0.46\linewidth}@{\hspace{1em}}p{0.46\linewidth}@{}}
+\textbf{\color{accent}AI / ML} & \textbf{\color{accent}Programming} \\
+PyTorch, TensorFlow, Scikit-learn, LLMs, NLP, vLLM & Python, Java, C, C++, Rust, SQL, TypeScript \\[3pt]
+\textbf{\color{accent}Cloud / DevOps} & \textbf{\color{accent}Data / Analytics} \\
+GCP, AWS, Docker, Kubernetes & Excel, Tableau, Power BI, R, MATLAB \\[3pt]
+\multicolumn{2}{@{}p{0.94\linewidth}@{}}{\textbf{\color{accent}Spoken}\;\; French (native) \(\cdot\) English (B2 --- TOEIC 815/990)} \\
+\end{tabular}
+
+%==================== CERTIFICATIONS ====================
+\sechead{Certifications}
+\small
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{@{}p{0.485\linewidth}@{\hspace{0.6em}}p{0.485\linewidth}@{}}
+{\href{https://www.coursera.org/account/accomplishments/specialization/certificate/47AF2A6LRGX4}{\textbf{Machine Learning Fundamentals}}} --- Stanford, Coursera
+&
+{\href{https://www.coursera.org/account/accomplishments/specialization/certificate/T5625DJ9A4NV}{\textbf{Deep Learning}}} --- deeplearning.ai, Coursera \\[2pt]
+\textbf{Fundamentals of Building AI Agents} --- IBM, May 2026
+&
+\textbf{Introduction to Financial Accounting} --- U. Pennsylvania, Jan 2025 \\[2pt]
+\multicolumn{2}{@{}p{0.97\linewidth}@{}}{\href{https://www.coursera.org/account/accomplishments/specialization/certificate/47AF2A6LRGX4}{\textbf{Python Programming}} --- Wesleyan University, Coursera} \\
+\end{tabular}
+
+\end{document}
