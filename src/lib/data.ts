@@ -88,8 +88,8 @@ export const papers: Paper[] = [
       "Benchmarking Generalization in Financial Statement Fraud Detection: Robust Evaluation and Novel Tasks",
     venue: "IJCAI-ECAI 2026, FINLLM Workshop",
     year: 2026,
-    status: "accepted",
-    tags: ["accepted", "IJCAI", "FINLLM", "fraud detection", "benchmark"],
+    status: "published",
+    tags: ["published", "IJCAI", "FINLLM", "fraud detection", "benchmark"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
       "Gael Guibon",

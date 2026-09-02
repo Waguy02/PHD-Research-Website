@@ -44,13 +44,17 @@ export default function Home() {
               fraud through multimodal LLM-based analysis.
             </p>
 
-            <div className="mb-6 grid grid-cols-3 gap-6 text-center sm:grid-cols-3">
+            <div className="mb-6 grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
               <div>
                 <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">4</div>
                 <div className="text-xs text-gray-400 dark:text-slate-500">Papers</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">3</div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">2</div>
+                <div className="text-xs text-gray-400 dark:text-slate-500">Published</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">1</div>
                 <div className="text-xs text-gray-400 dark:text-slate-500">Accepted</div>
               </div>
               <div>
@@ -150,10 +154,9 @@ export default function Home() {
           {sortedPapers.map((paper) => {
             const badge = statusBadge[paper.status];
             return (
-              <Link
+              <div
                 key={paper.id}
-                href={`/publications/${paper.id}`}
-                className="card-hover block rounded-xl border border-gray-200 bg-white p-5 transition-colors dark:border-slate-800 dark:bg-slate-900"
+                className="card-hover rounded-xl border border-gray-200 bg-white p-5 transition-colors dark:border-slate-800 dark:bg-slate-900"
               >
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <span className="rounded bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
@@ -163,9 +166,34 @@ export default function Home() {
                     {badge.label}
                   </span>
                 </div>
-                <h3 className="mb-1 font-medium text-gray-900 dark:text-slate-100">{paper.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-slate-400">{paper.authors.join(", ")}</p>
-              </Link>
+                <h3 className="mb-1 font-medium">
+                  <Link
+                    href={`/publications/${paper.id}`}
+                    className="text-gray-900 transition-colors hover:text-blue-700 dark:text-slate-100 dark:hover:text-blue-400"
+                  >
+                    {paper.title}
+                  </Link>
+                </h3>
+                <p className="mb-2 text-sm text-gray-500 dark:text-slate-400">{paper.authors.join(", ")}</p>
+                {paper.links.length > 0 && (
+                  <div className="flex flex-wrap gap-3">
+                    {paper.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                      >
+                        {link.label}
+                        <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
