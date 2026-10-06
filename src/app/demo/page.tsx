@@ -486,7 +486,7 @@ function DatasetSlideshow() {
                 </svg>
                 {/* Compression badge */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-2.5 shadow-lg">
+                  <div className="rounded-none bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-2.5 shadow-lg">
                     <span className="text-base font-bold text-white">
                       {(slide.rawMDA.split(" ").length / Math.max(slide.smda.split(" ").length, 1)).toFixed(1)}× compression
                     </span>
@@ -773,7 +773,7 @@ function ArchitectureSection() {
             { label: "Softmax Classifier", color: "bg-green-100 text-green-700 border-green-200" },
             { label: "AUC / F1 Eval", color: "bg-amber-100 text-amber-700 border-amber-200" },
           ].map((step, i) => (
-            <span key={step.label} className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 font-medium ${step.color}`}>
+            <span key={step.label} className={`inline-flex items-center gap-1 rounded-none border px-3 py-1 font-medium ${step.color}`}>
               {step.label}
               {i < 7 && <span className="text-gray-400 dark:text-slate-500">&rarr;</span>}
             </span>

@@ -11,6 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "/",
     "/publications",
+    "/apps",
+    "/forensicbench",
+    "/forensicbench/harness",
+    "/forensicbench/leaderboard",
     "/demo",
     "/team",
     "/cv",

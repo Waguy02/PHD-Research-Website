@@ -3,7 +3,6 @@ export interface Paper {
   title: string;
   venue: string;
   year: number;
-  status: "published" | "accepted" | "in_review" | "in_progress";
   tags: string[];
   authors: string[];
   abstract: string;
@@ -51,8 +50,7 @@ export const papers: Paper[] = [
       "Linking Industry Sectors and Financial Statements: A Hybrid Approach for Company Classification",
     venue: "AAAI 2025",
     year: 2025,
-    status: "published",
-    tags: ["published", "AAAI", "industry classification", "financial NLP"],
+    tags: ["AAAI", "industry classification", "financial NLP"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
       "Gael Guibon",
@@ -88,8 +86,7 @@ export const papers: Paper[] = [
       "Benchmarking Generalization in Financial Statement Fraud Detection: Robust Evaluation and Novel Tasks",
     venue: "IJCAI-ECAI 2026, FINLLM Workshop",
     year: 2026,
-    status: "published",
-    tags: ["published", "IJCAI", "FINLLM", "fraud detection", "benchmark"],
+    tags: ["IJCAI", "FINLLM", "fraud detection", "benchmark"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
       "Gael Guibon",
@@ -121,8 +118,7 @@ export const papers: Paper[] = [
       "ForensicBench: Evaluating Agentic LLMs on Journal-Entry Fraud Detection",
     venue: "EMNLP 2026 Industry Track",
     year: 2026,
-    status: "accepted",
-    tags: ["accepted", "EMNLP", "fraud detection", "benchmark", "agentic LLMs"],
+    tags: ["EMNLP", "fraud detection", "benchmark", "agentic LLMs"],
     authors: [
       "Guy Stephane Waffo Dzuyo",
       "Gael Guibon",
@@ -143,30 +139,6 @@ export const papers: Paper[] = [
       "12 open-weight models evaluated: best reaches only 34.7% Entry-F1 (Type-F1 up to 13 points lower)",
       "Rule-based oracle recovers 78-91% of schemes, confirming the benchmark is solvable",
       "Dataset, evaluation harness, and reference agentic baseline publicly released",
-    ],
-  },
-  {
-    id: "semmamba-neurips-2026",
-    title:
-      "SemMamba: State Space Models for Financial Statement Analysis",
-    venue: "NeurIPS 2026",
-    year: 2026,
-    status: "in_review",
-    tags: ["under_review", "NeurIPS", "state space models", "financial NLP", "Mamba"],
-    authors: [
-      "Guy Stephane Waffo Dzuyo",
-      "Gael Guibon",
-      "Christophe Cerisara",
-      "Luis Belmar-Letelier",
-    ],
-    abstract:
-      "We introduce SemMamba, a novel architecture leveraging State Space Models (SSMs) — specifically the Mamba architecture — for financial statement analysis. Unlike Transformers, Mamba models achieve linear-time inference and selective sequence modeling, making them ideal for long financial documents. We adapt Mamba to jointly process structured financial indicators and unstructured MD&A text, enabling efficient fraud detection at scale. Our experiments show competitive performance against LLM-based approaches while significantly reducing computational cost.",
-    links: [],
-    keyResults: [
-      "Mamba architecture adapted for financial statement analysis",
-      "Linear-time inference vs quadratic in Transformers",
-      "Selective sequence modeling for long financial documents",
-      "Joint processing of structured + unstructured financial data",
     ],
   },
 ];
@@ -239,21 +211,14 @@ export const timelineEvents: TimelineEvent[] = [
     year: 2026,
     title: "IJCAI 2026 FINLLM — Fraud Detection Benchmark",
     description:
-      "Accepted at IJCAI-ECAI 2026 FINLLM Workshop: CI-FSFD benchmark for robust evaluation of financial statement fraud detection.",
+      "Published at IJCAI-ECAI 2026 FINLLM Workshop: CI-FSFD benchmark for robust evaluation of financial statement fraud detection.",
     type: "paper",
   },
   {
     year: 2026,
     title: "EMNLP 2026 Industry Track — ForensicBench",
     description:
-      "Accepted at EMNLP 2026 Industry Track: ForensicBench, the first benchmark for evaluating agentic LLMs on scheme-level journal-entry fraud detection.",
-    type: "paper",
-  },
-  {
-    year: 2026,
-    title: "SemMamba @ NeurIPS 2026 (Under Review)",
-    description:
-      "Submitted to NeurIPS 2026: State Space Models (Mamba) for efficient financial statement analysis and fraud detection.",
+      "Published at EMNLP 2026 Industry Track: ForensicBench, the first benchmark for evaluating agentic LLMs on scheme-level journal-entry fraud detection.",
     type: "paper",
   },
 ];

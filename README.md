@@ -9,8 +9,8 @@ Personal research website showcasing publications, demos, and research in AI for
 ## Sections
 
 - **Home** — Research overview and latest publications
-- **Publications** — Accepted papers at AAAI 2025, IJCAI 2026 FINLLM, SemMamba @ NeurIPS 2026
-- **Demo** — Interactive CI-FSFD benchmark explorer for financial fraud detection
+- **Publications** — Papers at AAAI 2025, IJCAI 2026 FINLLM and EMNLP 2026 (ForensicBench)
+- **Apps** — Menu with two apps: **ForensicBench** (project page and open leaderboard with automatic scoring) and **CI-FSFD Demo** (interactive benchmark explorer for financial fraud detection)
 - **Team** — Research group members and affiliations
 - **CV** — Research timeline, skills, and education
 
@@ -40,6 +40,9 @@ src/
     publications/
       page.tsx          # Publications list
       [id]/page.tsx     # Individual paper detail pages
+    apps/page.tsx       # Apps landing page (ForensicBench, CI-FSFD Demo)
+    forensicbench/page.tsx  # ForensicBench project page
+    forensicbench/leaderboard/  # Leaderboard table and submission form (Supabase)
     demo/page.tsx       # FINLLM benchmark explorer
     team/page.tsx       # Research team
     cv/page.tsx         # CV / timeline

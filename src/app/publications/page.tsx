@@ -3,13 +3,6 @@ import Link from "next/link";
 import { papers } from "@/lib/data";
 import { useState } from "react";
 
-const statusStyles: Record<string, { bg: string; text: string; label: string }> = {
-  published: { bg: "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400", text: "", label: "Published" },
-  accepted: { bg: "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400", text: "", label: "Accepted" },
-  in_review: { bg: "bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400", text: "", label: "Under Review" },
-  in_progress: { bg: "bg-gray-100 text-gray-600 dark:bg-slate-800 dark:text-slate-400", text: "", label: "In Progress" },
-};
-
 export default function PublicationsPage() {
   const [activeTag, setActiveTag] = useState<string>("all");
 
@@ -33,7 +26,7 @@ export default function PublicationsPage() {
       <div className="mb-8 flex flex-wrap gap-2">
         <button
           onClick={() => setActiveTag("all")}
-          className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-colors ${
+          className={`rounded-none border px-4 py-1.5 text-xs font-medium transition-colors ${
             activeTag === "all"
               ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
               : "border-gray-200 bg-white text-gray-500 hover:border-gray-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700"
@@ -45,7 +38,7 @@ export default function PublicationsPage() {
           <button
             key={tag}
             onClick={() => setActiveTag(tag)}
-            className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-none border px-4 py-1.5 text-xs font-medium transition-colors ${
               activeTag === tag
                 ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
                 : "border-gray-200 bg-white text-gray-500 hover:border-gray-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700"
@@ -61,7 +54,6 @@ export default function PublicationsPage() {
           <p className="text-gray-400 dark:text-slate-500">No papers match the selected tag.</p>
         ) : (
           sorted.map((paper) => {
-            const badge = statusStyles[paper.status];
             return (
               <Link
                 key={paper.id}
@@ -71,9 +63,6 @@ export default function PublicationsPage() {
                 <div className="mb-3 flex flex-wrap items-center gap-2">
                   <span className="rounded bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
                     {paper.venue}
-                  </span>
-                  <span className={`rounded px-2.5 py-1 text-xs font-medium ${badge.bg}`}>
-                    {badge.label}
                   </span>
                   <span className="text-xs text-gray-400 dark:text-slate-500">{paper.year}</span>
                 </div>
