@@ -26,6 +26,7 @@ type Row = {
   precision: number | null;
   coverage: number | null;
   consistency: number | null;
+  per_sector?: Record<string, Partial<Record<"entry_f1" | "type_f1" | "recall" | "precision" | "coverage", number>>> | null;
 };
 
 // Used until the Supabase project is connected: the paper results (reference harness, 25 runs).
@@ -118,6 +119,7 @@ export function LeaderboardTable() {
   const [state, setState] = useState<"loading" | "live" | "fallback" | "error">(CONNECTED ? "loading" : "fallback");
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [type, setType] = useState<TypeFilter>("all");
+  const [selected, setSelected] = useState<Row | null>(null);
 
   useEffect(() => {
     if (!CONNECTED) return;
@@ -184,7 +186,12 @@ export function LeaderboardTable() {
             {shown.map((r, i) => (
               <tr
                 key={r.id}
-                className={`border-b border-gray-50 transition-colors hover:bg-blue-50/50 dark:border-slate-800/60 dark:hover:bg-slate-800/50 ${
+                tabIndex={0}
+                role="button"
+                aria-label={`Details for ${r.model}`}
+                onClick={() => setSelected(r)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelected(r); } }}
+                className={`cursor-pointer border-b border-gray-50 transition-colors hover:bg-blue-50/50 focus:outline-none focus-visible:bg-blue-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 dark:border-slate-800/60 dark:hover:bg-slate-800/50 ${
                   i % 2 ? "bg-gray-50/40 dark:bg-slate-900" : ""
                 }`}
               >
@@ -208,6 +215,7 @@ export function LeaderboardTable() {
                     {r.harness_url && (
                       <a
                         href={r.harness_url}
+                        onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-0.5 rounded bg-blue-50 px-1.5 py-0.5 font-medium text-blue-700 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-300"
@@ -255,7 +263,151 @@ export function LeaderboardTable() {
         </table>
       </div>
       <div className="border-t border-gray-100 px-4 py-2 text-[11px] text-gray-400 dark:border-slate-800 dark:text-slate-500">
-        Scores in %, macro-averaged over sectors. Best value per column highlighted. The reference harness is the plan-then-investigate agent used for the paper results.
+        Scores in %, macro-averaged over sectors. Best value per column highlighted. Click a row for the scores per dataset. The reference harness is the plan-then-investigate agent used for the paper results.
+      </div>
+      {selected && <DetailModal row={selected} onClose={() => setSelected(null)} />}
+    </div>
+  );
+}
+
+const SECTOR_LABELS: Record<string, string> = {
+  energy: "Energy",
+  healthcare: "Healthcare",
+  luxurygoods: "Luxury Goods",
+  manufacturing: "Manufacturing",
+  transport: "Transport",
+};
+const SECTOR_ORDER = ["energy", "healthcare", "luxurygoods", "manufacturing", "transport"];
+const DETAIL_METRICS = [
+  ["entry_f1", "Entry-F1"],
+  ["type_f1", "Type-F1"],
+  ["recall", "Recall"],
+  ["precision", "Precision"],
+  ["coverage", "Coverage"],
+] as const;
+
+function DetailModal({ row, onClose }: { row: Row; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [onClose]);
+
+  const ps = row.per_sector ?? null;
+  const sectors = ps ? SECTOR_ORDER.filter((k) => ps[k]) : [];
+  const colMax = (k: (typeof DETAIL_METRICS)[number][0]) => Math.max(...sectors.map((x) => ps?.[x]?.[k] ?? -Infinity));
+  const macro = [
+    row.entry_f1, row.type_f1, row.recall, row.precision, row.coverage,
+  ];
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-blue-950/60 p-4 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${row.model} detailed scores`}
+        className="max-h-[90vh] w-full max-w-3xl overflow-y-auto border border-blue-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 bg-blue-800 px-5 py-4 text-white">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-200">Rank {row.rank} · Scores per dataset</p>
+            <h3 className="mt-1 text-xl font-bold">
+              {row.model}
+              {row.params && <span className="ml-2 text-sm font-medium text-blue-200">{row.params}</span>}
+            </h3>
+            <p className="mt-1 text-sm text-blue-100">
+              {row.harness_name ?? "Harness not specified"} · {row.team} ·{" "}
+              {row.format === "single" ? "1 run per dataset" : `${row.n_replicates} runs per dataset`}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            autoFocus
+            className="-mr-1 -mt-1 p-1 text-blue-100 hover:bg-blue-700 hover:text-white"
+          >
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="p-5">
+          {sectors.length === 0 ? (
+            <p className="text-sm text-gray-600 dark:text-slate-400">
+              Per-dataset scores are not available for this entry.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] text-sm">
+                <thead>
+                  <tr className="border-b-2 border-blue-100 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:border-slate-700 dark:text-slate-400">
+                    <th className="py-2 pr-3">Dataset</th>
+                    <th className="w-44 px-3 py-2">Entry-F1</th>
+                    {DETAIL_METRICS.slice(1).map(([k, label]) => (
+                      <th key={k} className="px-3 py-2 text-right">{label}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {sectors.map((k) => {
+                    const v = ps?.[k] ?? {};
+                    return (
+                      <tr key={k} className="border-b border-gray-100 dark:border-slate-800">
+                        <td className="py-2.5 pr-3 font-medium text-gray-900 dark:text-slate-100">{SECTOR_LABELS[k] ?? k}</td>
+                        <td className="px-3 py-2.5">
+                          <span className="font-bold tabular-nums text-gray-900 dark:text-slate-100">{fmt(v.entry_f1 ?? null)}</span>
+                          <div className="mt-1 h-1.5 w-full bg-gray-100 dark:bg-slate-800">
+                            <div className="h-1.5 bg-blue-600 dark:bg-blue-400" style={{ width: `${Math.min(Math.max(((v.entry_f1 ?? 0) / 60) * 100, 1), 100)}%` }} />
+                          </div>
+                        </td>
+                        {DETAIL_METRICS.slice(1).map(([m]) => {
+                          const x = v[m] ?? null;
+                          const top = x !== null && x === colMax(m);
+                          return (
+                            <td key={m} className="px-3 py-2.5 text-right tabular-nums">
+                              <span className={top ? "bg-blue-50 px-1.5 py-0.5 font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" : "text-gray-700 dark:text-slate-300"}>
+                                {fmt(x)}
+                              </span>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                  <tr className="bg-blue-50/60 font-semibold dark:bg-slate-800/60">
+                    <td className="py-2.5 pr-3 text-blue-900 dark:text-blue-200">Macro average</td>
+                    <td className="px-3 py-2.5 tabular-nums text-blue-900 dark:text-blue-200">
+                      {fmt(macro[0])}
+                      {row.entry_f1_std !== null && row.entry_f1_std !== undefined && (
+                        <span className="ml-1 text-[11px] font-normal text-gray-500">±{fmt(row.entry_f1_std)}</span>
+                      )}
+                    </td>
+                    {macro.slice(1).map((x, i) => (
+                      <td key={i} className="px-3 py-2.5 text-right tabular-nums text-blue-900 dark:text-blue-200">{fmt(x)}</td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+          <p className="mt-4 text-xs text-gray-500 dark:text-slate-400">
+            Scores in %, averaged over the replicates of each dataset. Consistency (stability of Entry-F1 across replicates):{" "}
+            <span className="font-semibold">{fmt(row.consistency)}</span>.{" "}
+            {row.harness_url && (
+              <a href={row.harness_url} target="_blank" rel="noopener noreferrer" className="font-medium text-blue-700 underline dark:text-blue-300">
+                Harness code
+              </a>
+            )}
+          </p>
+        </div>
       </div>
     </div>
   );
