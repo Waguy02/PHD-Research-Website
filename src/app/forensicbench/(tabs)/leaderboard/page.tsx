@@ -60,6 +60,15 @@ export default function LeaderboardPage() {
       </section>
 
       <section className="mb-14">
+        <h2 className="mb-4 text-2xl font-bold tracking-tight">Labels</h2>
+        <p className="text-gray-600 dark:text-slate-400">
+          The ground-truth labels are held out so that the ranking stays meaningful, and scoring is automatic. If you need
+          them for research evaluation or reproduction, write to{" "}
+          <a href="mailto:guywaffo@gmail.com" className="font-medium text-blue-700 underline dark:text-blue-300">guywaffo@gmail.com</a>.
+        </p>
+      </section>
+
+      <section className="mb-14">
         <h2 className="mb-4 text-2xl font-bold tracking-tight">Harness code and verification</h2>
         <p className="mb-3 text-gray-600 dark:text-slate-400">
           Every submission must name its harness and include its code: a repository URL with the commit hash, or an
