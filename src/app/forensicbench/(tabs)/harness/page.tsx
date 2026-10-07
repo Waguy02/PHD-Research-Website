@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description: "The reference agent harness of ForensicBench: orient, plan once, investigate with SQL and Python, report.",
 };
 
+const DATASET_URL = "https://huggingface.co/datasets/WaguyMZ/ForensicBench";
 const HARNESS_URL = "https://github.com/WaguyMz/Forensic_Bench";
 const basePath = process.env.NODE_ENV === "production" ? "/PHD-Research-Website" : "";
 
@@ -48,6 +49,32 @@ export default function HarnessPage() {
         A worker receives one hypothesis with its exit criteria and budget. It alternates reasoning, tool calls (SQL,
         Python) and observation until the criteria are met or the budget is spent, then returns a verdict.
       </Figure>
+      <section className="mb-14">
+        <h2 className="mb-2 text-2xl font-bold tracking-tight">Fraud catalogue and prompts</h2>
+        <p className="mb-4 leading-relaxed text-gray-600 dark:text-slate-400">
+          The harness gives the agent a conceptual catalogue of the five scheme types: the normal business process and the
+          kinds of breakdown that can indicate manipulation. It names no GL account and no injection parameter, and contains
+          no label. The catalogue and the prompts of the reference harness are downloadable with the data.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {[
+            ["Fraud catalogue (Markdown)", "catalogue/fraud_catalogue.md"],
+            ["Fraud catalogue (JSON)", "catalogue/fraud_catalogue.json"],
+            ["Prompts of the reference harness", "prompts"],
+          ].map(([label, path]) => (
+            <a
+              key={path}
+              href={`${DATASET_URL}/${path.includes(".") ? "blob" : "tree"}/main/${path}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:border-blue-300 hover:text-blue-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-blue-700 dark:hover:text-blue-400"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </section>
+
       <Figure src="architecture.svg" alt="Benchmark architecture" title="Where the harness fits">
         The harness only sees the read-only ledger. Its flags are scored against labels that never leave the private
         store.
